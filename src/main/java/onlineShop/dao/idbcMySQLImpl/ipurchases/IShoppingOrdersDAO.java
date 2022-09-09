@@ -1,4 +1,4 @@
 package onlineShop.dao.idbcMySQLImpl.ipurchases;
 
-public class ShoppingOrdersDAO {
+public interface IShoppingOrdersDAO {
 }

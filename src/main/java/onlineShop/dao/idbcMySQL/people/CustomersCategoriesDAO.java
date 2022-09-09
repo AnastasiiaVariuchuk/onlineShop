@@ -1,4 +1,6 @@
-package onlineShop.dao.idbcMySQL;
+package onlineShop.dao.idbcMySQL.people;
 
-public class CustomersCategoriesDAO {
+import onlineShop.dao.idbcMySQLImpl.ipeople.ICustomersCategoriesDAO;
+
+public class CustomersCategoriesDAO implements ICustomersCategoriesDAO {
 }

@@ -1,4 +1,4 @@
-package onlineShop.dao.idbcMySQLImpl.places;
+package onlineShop.dao.idbcMySQLImpl.iplaces;
 
-public interface AddressesDAO {
+public interface IAddressesDAO {
 }

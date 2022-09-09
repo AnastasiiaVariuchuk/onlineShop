@@ -1,4 +1,6 @@
-package onlineShop.dao.idbcMySQL;
+package onlineShop.dao.idbcMySQL.products;
 
-public class ProductsDAO {
+import onlineShop.dao.idbcMySQLImpl.iproducts.IProductsDAO;
+
+public class ProductsDAO implements IProductsDAO {
 }

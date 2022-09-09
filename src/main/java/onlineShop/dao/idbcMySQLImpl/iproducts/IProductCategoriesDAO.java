@@ -1,4 +1,4 @@
-package onlineShop.dao.idbcMySQL.products;
+package onlineShop.dao.idbcMySQLImpl.iproducts;
 
-public class ProductCategoriesDAO {
+public interface IProductCategoriesDAO {
 }

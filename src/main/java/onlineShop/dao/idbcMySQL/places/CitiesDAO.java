@@ -1,2 +1,6 @@
-package onlineShop.dao.idbcMySQL.places;public class CitiesDAO {
+package onlineShop.dao.idbcMySQL.places;
+
+import onlineShop.dao.idbcMySQLImpl.iplaces.ICitiesDAO;
+
+public class CitiesDAO implements ICitiesDAO {
 }

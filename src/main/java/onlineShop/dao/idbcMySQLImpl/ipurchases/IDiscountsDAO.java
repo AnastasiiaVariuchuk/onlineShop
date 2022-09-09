@@ -1,2 +1,4 @@
-package onlineShop.dao.idbcMySQLImpl.ipurchases;public class DiscountsDAO {
+package onlineShop.dao.idbcMySQLImpl.ipurchases;
+
+public interface IDiscountsDAO {
 }

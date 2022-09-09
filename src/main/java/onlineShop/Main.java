@@ -1,2 +1,4 @@
-package onlineShop;public class Main {
+package onlineShop;
+
+public class Main {
 }

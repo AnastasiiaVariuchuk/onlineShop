@@ -1,6 +1,6 @@
-package onlineShop.dao.idbcMySQL;
+package onlineShop.dao.idbcMySQL.people;
 
-import onlineShop.dao.Person;
+import onlineShop.dao.idbcMySQLImpl.ipeople.IEmployeesDAO;
 
-public class EmployeesDAO extends Person {
+public class EmployeesDAO extends Person implements IEmployeesDAO {
 }

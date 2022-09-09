@@ -1,4 +1,4 @@
-package onlineShop.dao.idbcMySQL.people;
+package onlineShop.dao.idbcMySQLImpl.ipeople;
 
-public class CustomersDAO {
+public interface ICustomersDAO {
 }
