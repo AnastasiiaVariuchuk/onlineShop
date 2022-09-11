@@ -69,13 +69,13 @@ VALUES(7, 'Iphone 13', '128GB WHITE', 3, 1000, 2, 0);
 INSERT products(idproduct, productName, productDescription, idproductCategorie, productPrice, idmanufacturer, iddiscount)
 VALUES(8, 'Iphone 13', '128GB ROSE', 3, 1000, 2, 1);
 
-INSERT customersCategories(idcustomersCategory, customersCategoryType, customersCategorylDiscount)
+INSERT customersCategories(idcustomersCategory, customersCategoryType, customersCategoryDiscount)
 VALUES (1, 'Not a regular customer', false);
+INSERT customersCategories(idcustomersCategory, customersCategoryType, customersCategoryDiscount)
+VALUES (2, 'Regular customer', true);
+
 INSERT customers(idcustomer, customerName, customerSurname, customerCard, customerPhoneNumber, idCustomerCategory)
 VALUES (1, 'Anna', 'Ivanova', '5678908767895432', '+380997896578', 1);
-
-INSERT customers(idcustomer,  customerName, customerSurname,  customerCard, customerPhoneNumber, customerCategory)
-VALUES(1, 'Anna', 'Ivanova', '5678908767895432', '+380997896578', 1);
 INSERT customers(idcustomer,  customerName, customerSurname,  customerCard, customerPhoneNumber, customerCategory)
 VALUES(2, 'Ivanna', 'Kovalenco', '5678908767895433', '+380997896578', 2);
 

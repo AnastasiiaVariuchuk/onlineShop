@@ -6,16 +6,16 @@ public class Addresses {
     private int idAddress;
     private String addressName;
     private String addressPostalCode;
-    private int idCountry;
+    private int idCity;
 
     public Addresses() {
     }
 
-    public Addresses(int idAddress, String addressName, String addressPostalCode, int idCountry) {
+    public Addresses(int idAddress, String addressName, String addressPostalCode, int idCity) {
         this.idAddress = idAddress;
         this.addressName = addressName;
         this.addressPostalCode = addressPostalCode;
-        this.idCountry = idCountry;
+        this.idCity = idCity;
     }
 
     public int getIdAddress() {
@@ -42,12 +42,12 @@ public class Addresses {
         this.addressPostalCode = addressPostalCode;
     }
 
-    public int getIdCountry() {
-        return idCountry;
+    public int getIdCity() {
+        return idCity;
     }
 
-    public void setIdCountry(int idCountry) {
-        this.idCountry = idCountry;
+    public void setIdCity(int idCountry) {
+        this.idCity = idCountry;
     }
 
     @Override
@@ -55,12 +55,12 @@ public class Addresses {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Addresses addresses = (Addresses) o;
-        return idAddress == addresses.idAddress && idCountry == addresses.idCountry && addressName.equals(addresses.addressName) && addressPostalCode.equals(addresses.addressPostalCode);
+        return idAddress == addresses.idAddress && idCity == addresses.idCity && addressName.equals(addresses.addressName) && addressPostalCode.equals(addresses.addressPostalCode);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(idAddress, addressName, addressPostalCode, idCountry);
+        return Objects.hash(idAddress, addressName, addressPostalCode, idCity);
     }
 
     @Override
@@ -69,7 +69,7 @@ public class Addresses {
                 "idAddress=" + idAddress +
                 ", addressName='" + addressName + '\'' +
                 ", addressPostalCode='" + addressPostalCode + '\'' +
-                ", idCountry=" + idCountry +
+                ", idCountry=" + idCity +
                 '}';
     }
 }

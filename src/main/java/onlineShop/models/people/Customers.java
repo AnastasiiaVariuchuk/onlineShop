@@ -56,7 +56,7 @@ public class Customers {
     }
 
     public String getCustomerPhoneNumber() {
-        return customerPhoneNumber;
+        return this.customerPhoneNumber;
     }
 
     public void setCustomerPhoneNumber(String customerPhoneNumber) {
