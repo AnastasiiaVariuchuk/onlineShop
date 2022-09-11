@@ -83,7 +83,7 @@ public class UsersDAO implements IUsersDAO {
             preparedStatement.setString(2, users.getUserEmail());
             preparedStatement.setString(3, users.getUserPassword());
             preparedStatement.setDouble(4, users.getIdCustomer());
-            preparedStatement.setDouble(5, users.getIdUser());
+            preparedStatement.setInt(5, users.getIdUser());
             if (preparedStatement.executeUpdate() == 1) {
                 logger.info("Update process is successful: " + users.getUserName());
             } else
