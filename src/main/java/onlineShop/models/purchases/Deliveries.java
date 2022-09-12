@@ -1,5 +1,6 @@
 package onlineShop.models.purchases;
 
+import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
@@ -7,13 +8,13 @@ public class Deliveries {
     private int idDelivery;
     private int idAddress;
     private int idUser;
-    private LocalDateTime deliveryDataTime;
+    private Timestamp deliveryDataTime;
     private int idEmployee;
 
     public Deliveries() {
     }
 
-    public Deliveries(int idDelivery, int idAddress, int idUser, LocalDateTime deliveryDataTime, int idEmployee) {
+    public Deliveries(int idDelivery, int idAddress, int idUser, Timestamp deliveryDataTime, int idEmployee) {
         this.idDelivery = idDelivery;
         this.idAddress = idAddress;
         this.idUser = idUser;
@@ -45,11 +46,11 @@ public class Deliveries {
         this.idUser = idUser;
     }
 
-    public LocalDateTime getDeliveryDataTime() {
+    public Timestamp getDeliveryDataTime() {
         return deliveryDataTime;
     }
 
-    public void setDeliveryDataTime(LocalDateTime deliveryDataTime) {
+    public void setDeliveryDataTime(Timestamp deliveryDataTime) {
         this.deliveryDataTime = deliveryDataTime;
     }
 

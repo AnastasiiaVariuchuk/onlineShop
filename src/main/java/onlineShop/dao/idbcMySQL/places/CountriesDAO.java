@@ -70,8 +70,8 @@ public class CountriesDAO implements ICountriesDAO {
     public void update(Countries countries) {
         Connection connection = ConnectionUtil.getConnection();
         try {
-            PreparedStatement preparedStatement = connection.prepareStatement("UPDATE countries SET countryName=?, " +
-                    "WHERE idcountry?");
+            PreparedStatement preparedStatement = connection.prepareStatement("UPDATE countries SET countryName=?" +
+                    "WHERE idcountry=?");
             preparedStatement.setString(1, countries.getCountryName());
             preparedStatement.setInt(2, countries.getIdCountry());
             if (preparedStatement.executeUpdate() == 1) {
@@ -87,7 +87,7 @@ public class CountriesDAO implements ICountriesDAO {
     public void delete(int id) {
         Connection connection = ConnectionUtil.getConnection();
         try {
-            PreparedStatement preparedStatement = connection.prepareStatement("DELETE FROM countries WHERE idcountries=" + id);
+            PreparedStatement preparedStatement = connection.prepareStatement("DELETE FROM countries WHERE idcountry=" + id);
             if (preparedStatement.executeUpdate() == 1) {
                 logger.info("Delete process is successful.");
             } else

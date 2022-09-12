@@ -1,18 +1,19 @@
 package onlineShop.models.purchases;
 
+import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
 public class Payments {
     private int idPayment;
     private int idCustomer;
-    private LocalDateTime paymentDateTime;
+    private Timestamp paymentDateTime;
     private boolean paymentStatus;
 
     public Payments() {
     }
 
-    public Payments(int idPayment, int idCustomer, LocalDateTime paymentDateTime, boolean paymentStatus) {
+    public Payments(int idPayment, int idCustomer, Timestamp paymentDateTime, boolean paymentStatus) {
         this.idPayment = idPayment;
         this.idCustomer = idCustomer;
         this.paymentDateTime = paymentDateTime;
@@ -25,6 +26,30 @@ public class Payments {
 
     public void setIdPayment(int idPayment) {
         this.idPayment = idPayment;
+    }
+
+    public int getIdCustomer() {
+        return idCustomer;
+    }
+
+    public void setIdCustomer(int idCustomer) {
+        this.idCustomer = idCustomer;
+    }
+
+    public Timestamp getPaymentDateTime() {
+        return paymentDateTime;
+    }
+
+    public void setPaymentDateTime(Timestamp paymentDateTime) {
+        this.paymentDateTime = paymentDateTime;
+    }
+
+    public boolean isPaymentStatus() {
+        return paymentStatus;
+    }
+
+    public void setPaymentStatus(boolean paymentStatus) {
+        this.paymentStatus = paymentStatus;
     }
 
     @Override
