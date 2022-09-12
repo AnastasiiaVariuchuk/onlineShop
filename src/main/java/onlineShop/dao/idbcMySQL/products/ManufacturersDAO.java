@@ -1,9 +1,7 @@
 package onlineShop.dao.idbcMySQL.products;
 
-import onlineShop.ConnectionUtil;
-import onlineShop.dao.idbcMySQL.people.UsersDAO;
+import onlineShop.ConnectionUtil;;
 import onlineShop.dao.idbcMySQLImpl.iproducts.IManufacturersDAO;
-import onlineShop.models.people.Users;
 import onlineShop.models.products.Manufacturers;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
