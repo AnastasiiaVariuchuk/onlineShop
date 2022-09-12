@@ -27,7 +27,7 @@ public class Main {
         CountryDAO = new CountriesDAO();
 
         List<Countries> countries = CountryDAO.getAll();
-        System.out.println(countries);
+        MAIN_LOGGER.info(countries);
 
         //CountryDAO.add(3,"Canada");
 
