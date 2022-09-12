@@ -33,7 +33,7 @@ public class Main {
 
         //CountryDAO.getById(3);
 
-        //CountryDAO.update(new Countries(3, "Japan"));
+        //CountryDAO.update(new Countries(7, "Japan"));
 
         //CountryDAO.getById(3);
 
