@@ -82,7 +82,7 @@ VALUES(2, 'Ivanna', 'Kovalenco', '5678908767895433', '+380997896578', 2);
 INSERT users( iduser,  username, email,  password, idcustomer)
 VALUES(1, 'aNnA', 'annaivanova@gmail.com', '1234567890', 1);
 INSERT users( iduser,  username, email,  password, idcustomer)
-VALUES(2, 'iVV', 'ivv@gmail.com', '1234567891', 2)
+VALUES(2, 'iVV', 'ivv@gmail.com', '1234567891', 2);
 
 INSERT shoppingOrders(idshoppingOrder, shoppingOrderDate, shoppingOrderTotalPrice, iduser)
 VALUES(2, '2022-08-23', 780, 2);
@@ -150,7 +150,7 @@ DELETE FROM cities
 WHERE cityName = 'Los Angeles';
 
 SELECT * FROM products 
-WHERE productPrice BETWEEN 50 AND 1100
+WHERE productPrice BETWEEN 50 AND 1100;
 
 SELECT COUNT(*) FROM users;
 
