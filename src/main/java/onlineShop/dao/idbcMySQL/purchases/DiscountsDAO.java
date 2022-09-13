@@ -21,41 +21,77 @@ public class DiscountsDAO implements IDiscountsDAO {
     }
     @Override
     public Discounts getById(int id) {
+        ResultSet resultSet = null;
+        Statement statement = null;
         Connection connection = ConnectionUtil.getConnection();
         try {
-            Statement statement = connection.createStatement();
-            ResultSet resultSet = statement.executeQuery("SELECT * FROM discounts WHERE iddiscount=" + id);
+            statement = connection.createStatement();
+            resultSet = statement.executeQuery("SELECT * FROM discounts WHERE iddiscount=" + id);
             if (resultSet.next()) {
                 logger.info(getDiscountsById(resultSet));
                 return getDiscountsById(resultSet);
             }
         } catch (SQLException e) {
             e.printStackTrace();
+        } finally {
+            try {
+                if (resultSet != null) resultSet.close();
+            } catch (SQLException se) {
+                se.printStackTrace();
+            }
+            try {
+                if (statement != null) statement.close();
+            } catch (SQLException se) {
+                se.printStackTrace();
+            }
+            try {
+                if (connection != null) connection.close();
+            } catch (SQLException se) {
+                se.printStackTrace();
+            }
         }
         return null;
     }
 
     @Override
     public List<Discounts> getAll() {
-        PreparedStatement preparedStatement;
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
         Connection connection = ConnectionUtil.getConnection();
         try {
             preparedStatement = connection.prepareStatement("SELECT * FROM discounts");
-            ResultSet resultSet = preparedStatement.executeQuery();
+            resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
                 discounts.add(getDiscountsById(resultSet));
             }
         } catch (SQLException e) {
             e.printStackTrace();
+        } finally {
+            try {
+                if (preparedStatement != null) preparedStatement.close();
+            } catch (SQLException se) {
+                se.printStackTrace();
+            }
+            try {
+                if (connection != null) connection.close();
+            } catch (SQLException se) {
+                se.printStackTrace();
+            }
+            try {
+                if (resultSet != null) resultSet.close();
+            } catch (SQLException se) {
+                se.printStackTrace();
+            }
         }
         return discounts;
     }
 
     @Override
     public void add(int id, double discountSize) {
+        PreparedStatement preparedStatement = null;
         Connection connection = ConnectionUtil.getConnection();
         try {
-            PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO discounts VALUE(default, ?)");
+            preparedStatement = connection.prepareStatement("INSERT INTO discounts VALUE(default, ?)");
             preparedStatement.setDouble(1, discountSize);
             if (preparedStatement.executeUpdate() == 1) {
                 logger.info("Insertion is successful.");
@@ -63,14 +99,26 @@ public class DiscountsDAO implements IDiscountsDAO {
                 logger.info("Insertion was failed.");
         } catch (SQLException e) {
             e.getMessage();
+        } finally {
+            try {
+                if (preparedStatement != null) preparedStatement.close();
+            } catch (SQLException se) {
+                se.printStackTrace();
+            }
+            try {
+                if (connection != null) connection.close();
+            } catch (SQLException se) {
+                se.printStackTrace();
+            }
         }
     }
 
     @Override
     public void update(Discounts discounts) {
+        PreparedStatement preparedStatement = null;
         Connection connection = ConnectionUtil.getConnection();
         try {
-            PreparedStatement preparedStatement = connection.prepareStatement("UPDATE discounts SET discountSize=? " +
+            preparedStatement = connection.prepareStatement("UPDATE discounts SET discountSize=? " +
                     "WHERE iddiscount=?");
             preparedStatement.setDouble(1, discounts.getDiscountSize());
             preparedStatement.setInt(2, discounts.getIdDiscount());
@@ -80,14 +128,26 @@ public class DiscountsDAO implements IDiscountsDAO {
                 logger.info("Update process was failed: " + discounts.getIdDiscount());
         } catch (SQLException e) {
             e.printStackTrace();
+        } finally {
+            try {
+                if (preparedStatement != null) preparedStatement.close();
+            } catch (SQLException se) {
+                se.printStackTrace();
+            }
+            try {
+                if (connection != null) connection.close();
+            } catch (SQLException se) {
+                se.printStackTrace();
+            }
         }
     }
 
     @Override
     public void delete(int id) {
+        PreparedStatement preparedStatement = null;
         Connection connection = ConnectionUtil.getConnection();
         try {
-            PreparedStatement preparedStatement = connection.prepareStatement("DELETE FROM discounts " +
+            preparedStatement = connection.prepareStatement("DELETE FROM discounts " +
                     "WHERE iddiscount=" + id);
             if (preparedStatement.executeUpdate() == 1) {
                 logger.info("Delete process is successful.");
@@ -95,6 +155,17 @@ public class DiscountsDAO implements IDiscountsDAO {
                 logger.info("Delete process was failed.");
         } catch (SQLException e) {
             e.printStackTrace();
+        } finally {
+            try {
+                if (preparedStatement != null) preparedStatement.close();
+            } catch (SQLException se) {
+                se.printStackTrace();
+            }
+            try {
+                if (connection != null) connection.close();
+            } catch (SQLException se) {
+                se.printStackTrace();
+            }
         }
     }
 }

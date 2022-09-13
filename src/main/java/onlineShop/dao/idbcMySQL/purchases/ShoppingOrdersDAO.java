@@ -25,41 +25,77 @@ public class ShoppingOrdersDAO implements IShoppingOrdersDAO {
     }
     @Override
     public ShoppingOrders getById(int id) {
+        ResultSet resultSet = null;
+        Statement statement = null;
         Connection connection = ConnectionUtil.getConnection();
         try {
-            Statement statement = connection.createStatement();
-            ResultSet resultSet = statement.executeQuery("SELECT * FROM shoppingOrders WHERE idshoppingOrder=" + id);
+            statement = connection.createStatement();
+            resultSet = statement.executeQuery("SELECT * FROM shoppingOrders WHERE idshoppingOrder=" + id);
             if (resultSet.next()) {
                 logger.info(getShoppingOrdersById(resultSet));
                 return getShoppingOrdersById(resultSet);
             }
         } catch (SQLException e) {
             e.printStackTrace();
+        } finally {
+            try {
+                if (resultSet != null) resultSet.close();
+            } catch (SQLException se) {
+                se.printStackTrace();
+            }
+            try {
+                if (statement != null) statement.close();
+            } catch (SQLException se) {
+                se.printStackTrace();
+            }
+            try {
+                if (connection != null) connection.close();
+            } catch (SQLException se) {
+                se.printStackTrace();
+            }
         }
         return null;
     }
 
     @Override
     public List<ShoppingOrders> getAll() {
-        PreparedStatement preparedStatement;
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
         Connection connection = ConnectionUtil.getConnection();
         try {
             preparedStatement = connection.prepareStatement("SELECT * FROM shoppingOrders");
-            ResultSet resultSet = preparedStatement.executeQuery();
+            resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
                 shoppingOrders.add(getShoppingOrdersById(resultSet));
             }
         } catch (SQLException e) {
             e.printStackTrace();
+        } finally {
+            try {
+                if (preparedStatement != null) preparedStatement.close();
+            } catch (SQLException se) {
+                se.printStackTrace();
+            }
+            try {
+                if (connection != null) connection.close();
+            } catch (SQLException se) {
+                se.printStackTrace();
+            }
+            try {
+                if (resultSet != null) resultSet.close();
+            } catch (SQLException se) {
+                se.printStackTrace();
+            }
         }
         return shoppingOrders;
     }
 
     @Override
     public void add(int id, Date shoppingOrderDate, double shoppingOrderTotalPrice, int idUser) {
+        PreparedStatement preparedStatement = null;
         Connection connection = ConnectionUtil.getConnection();
         try {
-            PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO shoppingOrders VALUE(default, ?, ?, ?)");
+            preparedStatement = connection.prepareStatement("INSERT INTO shoppingOrders VALUE(default, ?, ?, ?)");
             preparedStatement.setDate(1, (java.sql.Date) shoppingOrderDate);
             preparedStatement.setDouble(2, shoppingOrderTotalPrice);
             preparedStatement.setInt(3, idUser);
@@ -69,14 +105,26 @@ public class ShoppingOrdersDAO implements IShoppingOrdersDAO {
                 logger.info("Insertion was failed.");
         } catch (SQLException e) {
             e.getMessage();
+        } finally {
+            try {
+                if (preparedStatement != null) preparedStatement.close();
+            } catch (SQLException se) {
+                se.printStackTrace();
+            }
+            try {
+                if (connection != null) connection.close();
+            } catch (SQLException se) {
+                se.printStackTrace();
+            }
         }
     }
 
     @Override
     public void update(ShoppingOrders shoppingOrders) {
+        PreparedStatement preparedStatement = null;
         Connection connection = ConnectionUtil.getConnection();
         try {
-            PreparedStatement preparedStatement = connection.prepareStatement("UPDATE shoppingOrders SET shoppingOrderDate=?, " +
+            preparedStatement = connection.prepareStatement("UPDATE shoppingOrders SET shoppingOrderDate=?, " +
                     "shoppingOrderDate=?, shoppingOrderTotalPrice=?, iduser=? WHERE idproductOrder=?");
             preparedStatement.setDate(1, (java.sql.Date) shoppingOrders.getShoppingOrderDate());
             preparedStatement.setDouble(2, shoppingOrders.getShoppingOrderTotalPrice());
@@ -88,15 +136,26 @@ public class ShoppingOrdersDAO implements IShoppingOrdersDAO {
                 logger.info("Update process was failed: " + shoppingOrders.getIdShoppingOrder() + " " + shoppingOrders.getIdUser());
         } catch (SQLException e) {
             e.printStackTrace();
+        } finally {
+            try {
+                if (preparedStatement != null) preparedStatement.close();
+            } catch (SQLException se) {
+                se.printStackTrace();
+            }
+            try {
+                if (connection != null) connection.close();
+            } catch (SQLException se) {
+                se.printStackTrace();
+            }
         }
-
     }
 
     @Override
     public void delete(int id) {
+        PreparedStatement preparedStatement = null;
         Connection connection = ConnectionUtil.getConnection();
         try {
-            PreparedStatement preparedStatement = connection.prepareStatement("DELETE FROM shoppingOrders " +
+            preparedStatement = connection.prepareStatement("DELETE FROM shoppingOrders " +
                     "WHERE idshoppingOrder=" + id);
             if (preparedStatement.executeUpdate() == 1) {
                 logger.info("Delete process is successful.");
@@ -104,6 +163,17 @@ public class ShoppingOrdersDAO implements IShoppingOrdersDAO {
                 logger.info("Delete process was failed.");
         } catch (SQLException e) {
             e.printStackTrace();
+        } finally {
+            try {
+                if (preparedStatement != null) preparedStatement.close();
+            } catch (SQLException se) {
+                se.printStackTrace();
+            }
+            try {
+                if (connection != null) connection.close();
+            } catch (SQLException se) {
+                se.printStackTrace();
+            }
         }
     }
 }

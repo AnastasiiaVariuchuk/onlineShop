@@ -25,41 +25,77 @@ public class PaymentsDAO implements IPaymentsDAO {
     }
     @Override
     public Payments getById(int id) {
+        ResultSet resultSet = null;
+        Statement statement = null;
         Connection connection = ConnectionUtil.getConnection();
         try {
-            Statement statement = connection.createStatement();
-            ResultSet resultSet = statement.executeQuery("SELECT * FROM payments WHERE idpayment=" + id);
+            statement = connection.createStatement();
+            resultSet = statement.executeQuery("SELECT * FROM payments WHERE idpayment=" + id);
             if (resultSet.next()) {
                 logger.info(getPaymentsById(resultSet));
                 return getPaymentsById(resultSet);
             }
         } catch (SQLException e) {
             e.printStackTrace();
+        } finally {
+            try {
+                if (resultSet != null) resultSet.close();
+            } catch (SQLException se) {
+                se.printStackTrace();
+            }
+            try {
+                if (statement != null) statement.close();
+            } catch (SQLException se) {
+                se.printStackTrace();
+            }
+            try {
+                if (connection != null) connection.close();
+            } catch (SQLException se) {
+                se.printStackTrace();
+            }
         }
         return null;
     }
 
     @Override
     public List<Payments> getAll() {
-        PreparedStatement preparedStatement;
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
         Connection connection = ConnectionUtil.getConnection();
         try {
             preparedStatement = connection.prepareStatement("SELECT * FROM payments");
-            ResultSet resultSet = preparedStatement.executeQuery();
+            resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
                 payments.add(getPaymentsById(resultSet));
             }
         } catch (SQLException e) {
             e.printStackTrace();
+        } finally {
+            try {
+                if (preparedStatement != null) preparedStatement.close();
+            } catch (SQLException se) {
+                se.printStackTrace();
+            }
+            try {
+                if (connection != null) connection.close();
+            } catch (SQLException se) {
+                se.printStackTrace();
+            }
+            try {
+                if (resultSet != null) resultSet.close();
+            } catch (SQLException se) {
+                se.printStackTrace();
+            }
         }
         return payments;
     }
 
     @Override
     public void add(int id, int idCustomer, Timestamp paymentDateTime, boolean paymentStatus) {
+        PreparedStatement preparedStatement = null;
         Connection connection = ConnectionUtil.getConnection();
         try {
-            PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO payments VALUE(default, ?, ?, ?)");
+            preparedStatement = connection.prepareStatement("INSERT INTO payments VALUE(default, ?, ?, ?)");
             preparedStatement.setInt(1, idCustomer);
             preparedStatement.setTimestamp(2, paymentDateTime);
             preparedStatement.setBoolean(3, paymentStatus);
@@ -69,14 +105,26 @@ public class PaymentsDAO implements IPaymentsDAO {
                 logger.info("Insertion was failed.");
         } catch (SQLException e) {
             e.getMessage();
+        } finally {
+            try {
+                if (preparedStatement != null) preparedStatement.close();
+            } catch (SQLException se) {
+                se.printStackTrace();
+            }
+            try {
+                if (connection != null) connection.close();
+            } catch (SQLException se) {
+                se.printStackTrace();
+            }
         }
     }
 
     @Override
     public void update(Payments payments) {
+        PreparedStatement preparedStatement = null;
         Connection connection = ConnectionUtil.getConnection();
         try {
-            PreparedStatement preparedStatement = connection.prepareStatement("UPDATE payments SET idcustomer=?, " +
+            preparedStatement = connection.prepareStatement("UPDATE payments SET idcustomer=?, " +
                     "idpaymentDateTime=?, paymentStatus=? WHERE idpayment=?");
             preparedStatement.setInt(1, payments.getIdCustomer());
             preparedStatement.setTimestamp(2, payments.getPaymentDateTime());
@@ -88,14 +136,26 @@ public class PaymentsDAO implements IPaymentsDAO {
                 logger.info("Update process was failed: " + payments.getIdPayment() + " " + payments.getIdCustomer());
         } catch (SQLException e) {
             e.printStackTrace();
+        } finally {
+            try {
+                if (preparedStatement != null) preparedStatement.close();
+            } catch (SQLException se) {
+                se.printStackTrace();
+            }
+            try {
+                if (connection != null) connection.close();
+            } catch (SQLException se) {
+                se.printStackTrace();
+            }
         }
     }
 
     @Override
     public void delete(int id) {
+        PreparedStatement preparedStatement = null;
         Connection connection = ConnectionUtil.getConnection();
         try {
-            PreparedStatement preparedStatement = connection.prepareStatement("DELETE FROM payments " +
+            preparedStatement = connection.prepareStatement("DELETE FROM payments " +
                     "WHERE idpayment=" + id);
             if (preparedStatement.executeUpdate() == 1) {
                 logger.info("Delete process is successful.");
@@ -103,6 +163,17 @@ public class PaymentsDAO implements IPaymentsDAO {
                 logger.info("Delete process was failed.");
         } catch (SQLException e) {
             e.printStackTrace();
+        } finally {
+            try {
+                if (preparedStatement != null) preparedStatement.close();
+            } catch (SQLException se) {
+                se.printStackTrace();
+            }
+            try {
+                if (connection != null) connection.close();
+            } catch (SQLException se) {
+                se.printStackTrace();
+            }
         }
     }
 }
