@@ -23,41 +23,77 @@ public class ProductCategoriesDAO implements IProductCategoriesDAO {
 
     @Override
     public ProductCategories getById(int id) {
+        ResultSet resultSet = null;
+        Statement statement = null;
         Connection connection = ConnectionUtil.getConnection();
         try {
-            Statement statement = connection.createStatement();
-            ResultSet resultSet = statement.executeQuery("SELECT * FROM productCategories WHERE idProductCategorie=" + id);
+            statement = connection.createStatement();
+            resultSet = statement.executeQuery("SELECT * FROM productCategories WHERE idProductCategorie=" + id);
             if (resultSet.next()) {
                 logger.info(getProductCategoriesById(resultSet));
                 return getProductCategoriesById(resultSet);
             }
         } catch (SQLException e) {
             e.printStackTrace();
+        } finally {
+            try {
+                if (resultSet != null) resultSet.close();
+            } catch (SQLException se) {
+                se.printStackTrace();
+            }
+            try {
+                if (statement != null) statement.close();
+            } catch (SQLException se) {
+                se.printStackTrace();
+            }
+            try {
+                if (connection != null) connection.close();
+            } catch (SQLException se) {
+                se.printStackTrace();
+            }
         }
         return null;
     }
 
     @Override
     public List<ProductCategories> getAll() {
-        PreparedStatement preparedStatement;
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
         Connection connection = ConnectionUtil.getConnection();
         try {
             preparedStatement = connection.prepareStatement("SELECT * FROM productCategories");
-            ResultSet resultSet = preparedStatement.executeQuery();
+            resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
                 productCategories.add(getProductCategoriesById(resultSet));
             }
         } catch (SQLException e) {
             e.printStackTrace();
+        } finally {
+            try {
+                if (preparedStatement != null) preparedStatement.close();
+            } catch (SQLException se) {
+                se.printStackTrace();
+            }
+            try {
+                if (connection != null) connection.close();
+            } catch (SQLException se) {
+                se.printStackTrace();
+            }
+            try {
+                if (resultSet != null) resultSet.close();
+            } catch (SQLException se) {
+                se.printStackTrace();
+            }
         }
         return productCategories;
     }
 
     @Override
     public void add(int id, String productCategoryName) {
+        PreparedStatement preparedStatement = null;
         Connection connection = ConnectionUtil.getConnection();
         try {
-            PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO productCategories VALUE(default, ?)");
+            preparedStatement = connection.prepareStatement("INSERT INTO productCategories VALUE(default, ?)");
             preparedStatement.setString(1, productCategoryName);
             if (preparedStatement.executeUpdate() == 1) {
                 logger.info("Insertion is successful.");
@@ -65,14 +101,26 @@ public class ProductCategoriesDAO implements IProductCategoriesDAO {
                 logger.info("Insertion was failed.");
         } catch (SQLException e) {
             e.getMessage();
+        } finally {
+            try {
+                if (preparedStatement != null) preparedStatement.close();
+            } catch (SQLException se) {
+                se.printStackTrace();
+            }
+            try {
+                if (connection != null) connection.close();
+            } catch (SQLException se) {
+                se.printStackTrace();
+            }
         }
     }
 
     @Override
     public void update(ProductCategories productCategories) {
+        PreparedStatement preparedStatement = null;
         Connection connection = ConnectionUtil.getConnection();
         try {
-            PreparedStatement preparedStatement = connection.prepareStatement("UPDATE productCategories SET productCategorieName=? " +
+            preparedStatement = connection.prepareStatement("UPDATE productCategories SET productCategorieName=? " +
                     "WHERE idproductCategorie=?");
             preparedStatement.setString(1, productCategories.getProductCategoryName());
             preparedStatement.setInt(2, productCategories.getIdProductCategory());
@@ -82,14 +130,26 @@ public class ProductCategoriesDAO implements IProductCategoriesDAO {
                 logger.info("Update process was failed: " + productCategories.getProductCategoryName());
         } catch (SQLException e) {
             e.printStackTrace();
+        } finally {
+            try {
+                if (preparedStatement != null) preparedStatement.close();
+            } catch (SQLException se) {
+                se.printStackTrace();
+            }
+            try {
+                if (connection != null) connection.close();
+            } catch (SQLException se) {
+                se.printStackTrace();
+            }
         }
     }
 
     @Override
     public void delete(int id) {
+        PreparedStatement preparedStatement = null;
         Connection connection = ConnectionUtil.getConnection();
         try {
-            PreparedStatement preparedStatement = connection.prepareStatement("DELETE FROM productCategories " +
+            preparedStatement = connection.prepareStatement("DELETE FROM productCategories " +
                     "WHERE idproductCategorie=" + id);
             if (preparedStatement.executeUpdate() == 1) {
                 logger.info("Delete process is successful.");
@@ -97,6 +157,17 @@ public class ProductCategoriesDAO implements IProductCategoriesDAO {
                 logger.info("Delete process was failed.");
         } catch (SQLException e) {
             e.printStackTrace();
+        } finally {
+            try {
+                if (preparedStatement != null) preparedStatement.close();
+            } catch (SQLException se) {
+                se.printStackTrace();
+            }
+            try {
+                if (connection != null) connection.close();
+            } catch (SQLException se) {
+                se.printStackTrace();
+            }
         }
     }
 }

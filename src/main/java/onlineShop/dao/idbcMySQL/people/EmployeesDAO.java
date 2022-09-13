@@ -25,41 +25,77 @@ public class EmployeesDAO implements IEmployeesDAO {
     }
     @Override
     public Employees getById(int id) {
+        ResultSet resultSet = null;
+        Statement statement = null;
         Connection connection = ConnectionUtil.getConnection();
         try {
-            Statement statement = connection.createStatement();
-            ResultSet resultSet = statement.executeQuery("SELECT * FROM employees WHERE idemployee=" + id);
+            statement = connection.createStatement();
+            resultSet = statement.executeQuery("SELECT * FROM employees WHERE idemployee=" + id);
             if (resultSet.next()) {
                 logger.info(getEmployeesById(resultSet));
                 return getEmployeesById(resultSet);
             }
         } catch (SQLException e) {
             e.printStackTrace();
+        } finally {
+            try {
+                if (resultSet != null) resultSet.close();
+            } catch (SQLException se) {
+                se.printStackTrace();
+            }
+            try {
+                if (statement != null) statement.close();
+            } catch (SQLException se) {
+                se.printStackTrace();
+            }
+            try {
+                if (connection != null) connection.close();
+            } catch (SQLException se) {
+                se.printStackTrace();
+            }
         }
         return null;
     }
 
     @Override
     public List<Employees> getAll() {
-        PreparedStatement preparedStatement;
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
         Connection connection = ConnectionUtil.getConnection();
         try {
             preparedStatement = connection.prepareStatement("SELECT * FROM employees");
-            ResultSet resultSet = preparedStatement.executeQuery();
+            resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
                 employees.add(getEmployeesById(resultSet));
             }
         } catch (SQLException e) {
             e.printStackTrace();
+        } finally {
+            try {
+                if (preparedStatement != null) preparedStatement.close();
+            } catch (SQLException se) {
+                se.printStackTrace();
+            }
+            try {
+                if (connection != null) connection.close();
+            } catch (SQLException se) {
+                se.printStackTrace();
+            }
+            try {
+                if (resultSet != null) resultSet.close();
+            } catch (SQLException se) {
+                se.printStackTrace();
+            }
         }
         return employees;
     }
 
     @Override
     public void add(int id, String employeeName, String employeeSurname, String employeeContact, double employeeSalary) {
+        PreparedStatement preparedStatement = null;
         Connection connection = ConnectionUtil.getConnection();
         try {
-            PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO employees VALUE(default, ?, ?, ?, ?, ?)");
+            preparedStatement = connection.prepareStatement("INSERT INTO employees VALUE(default, ?, ?, ?, ?, ?)");
             preparedStatement.setString(1, employeeName);
             preparedStatement.setString(2, employeeSurname);
             preparedStatement.setString(3, employeeContact);
@@ -70,14 +106,26 @@ public class EmployeesDAO implements IEmployeesDAO {
                 logger.info("Insertion was failed.");
         } catch (SQLException e) {
             e.getMessage();
+        } finally {
+            try {
+                if (preparedStatement != null) preparedStatement.close();
+            } catch (SQLException se) {
+                se.printStackTrace();
+            }
+            try {
+                if (connection != null) connection.close();
+            } catch (SQLException se) {
+                se.printStackTrace();
+            }
         }
     }
 
     @Override
     public void update(Employees employees) {
+        PreparedStatement preparedStatement = null;
         Connection connection = ConnectionUtil.getConnection();
         try {
-            PreparedStatement preparedStatement = connection.prepareStatement("UPDATE employees SET employeeName=?, " +
+            preparedStatement = connection.prepareStatement("UPDATE employees SET employeeName=?, " +
                     "employeeSurname=?, employeeContact=?, employeeSalary=? WHERE idemployee=?");
             preparedStatement.setString(1, employees.getEmployeeName());
             preparedStatement.setString(2, employees.getEmployeeSurname());
@@ -90,14 +138,26 @@ public class EmployeesDAO implements IEmployeesDAO {
                 logger.info("Update process was failed: " + employees.getEmployeeName() + employees.getEmployeeSurname());
         } catch (SQLException e) {
             e.printStackTrace();
+        } finally {
+            try {
+                if (preparedStatement != null) preparedStatement.close();
+            } catch (SQLException se) {
+                se.printStackTrace();
+            }
+            try {
+                if (connection != null) connection.close();
+            } catch (SQLException se) {
+                se.printStackTrace();
+            }
         }
     }
 
     @Override
     public void delete(int id) {
+        PreparedStatement preparedStatement = null;
         Connection connection = ConnectionUtil.getConnection();
         try {
-            PreparedStatement preparedStatement = connection.prepareStatement("DELETE FROM employees " +
+            preparedStatement = connection.prepareStatement("DELETE FROM employees " +
                     "WHERE idemployee=" + id);
             if (preparedStatement.executeUpdate() == 1) {
                 logger.info("Delete process is successful.");
@@ -105,6 +165,17 @@ public class EmployeesDAO implements IEmployeesDAO {
                 logger.info("Delete process was failed.");
         } catch (SQLException e) {
             e.printStackTrace();
+        } finally {
+            try {
+                if (preparedStatement != null) preparedStatement.close();
+            } catch (SQLException se) {
+                se.printStackTrace();
+            }
+            try {
+                if (connection != null) connection.close();
+            } catch (SQLException se) {
+                se.printStackTrace();
+            }
         }
     }
 }

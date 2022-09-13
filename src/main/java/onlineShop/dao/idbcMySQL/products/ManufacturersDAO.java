@@ -22,41 +22,77 @@ public class ManufacturersDAO implements IManufacturersDAO {
     }
     @Override
     public Manufacturers getById(int id) {
+        ResultSet resultSet = null;
+        Statement statement = null;
         Connection connection = ConnectionUtil.getConnection();
         try {
-            Statement statement = connection.createStatement();
-            ResultSet resultSet = statement.executeQuery("SELECT * FROM manufacturers WHERE idmanufacturer=" + id);
+            statement = connection.createStatement();
+            resultSet = statement.executeQuery("SELECT * FROM manufacturers WHERE idmanufacturer=" + id);
             if (resultSet.next()) {
                 logger.info(getManufacturersById(resultSet));
                 return getManufacturersById(resultSet);
             }
         } catch (SQLException e) {
             e.printStackTrace();
+        } finally {
+            try {
+                if (resultSet != null) resultSet.close();
+            } catch (SQLException se) {
+                se.printStackTrace();
+            }
+            try {
+                if (statement != null) statement.close();
+            } catch (SQLException se) {
+                se.printStackTrace();
+            }
+            try {
+                if (connection != null) connection.close();
+            } catch (SQLException se) {
+                se.printStackTrace();
+            }
         }
         return null;
     }
 
     @Override
     public List<Manufacturers> getAll() {
-        PreparedStatement preparedStatement;
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
         Connection connection = ConnectionUtil.getConnection();
         try {
             preparedStatement = connection.prepareStatement("SELECT * FROM manufacturers");
-            ResultSet resultSet = preparedStatement.executeQuery();
+            resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
                 manufacturers.add(getManufacturersById(resultSet));
             }
         } catch (SQLException e) {
             e.printStackTrace();
+        } finally {
+            try {
+                if (preparedStatement != null) preparedStatement.close();
+            } catch (SQLException se) {
+                se.printStackTrace();
+            }
+            try {
+                if (connection != null) connection.close();
+            } catch (SQLException se) {
+                se.printStackTrace();
+            }
+            try {
+                if (resultSet != null) resultSet.close();
+            } catch (SQLException se) {
+                se.printStackTrace();
+            }
         }
         return manufacturers;
     }
 
     @Override
     public void add(int id, String manufacturerName, String manufacturerContact) {
+        PreparedStatement preparedStatement = null;
         Connection connection = ConnectionUtil.getConnection();
         try {
-            PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO manufacturers VALUE(default, ?, ?)");
+            preparedStatement = connection.prepareStatement("INSERT INTO manufacturers VALUE(default, ?, ?)");
             preparedStatement.setString(1, manufacturerName);
             preparedStatement.setString(2, manufacturerContact);
             if (preparedStatement.executeUpdate() == 1) {
@@ -65,14 +101,26 @@ public class ManufacturersDAO implements IManufacturersDAO {
                 logger.info("Insertion was failed.");
         } catch (SQLException e) {
             e.getMessage();
+        } finally {
+            try {
+                if (preparedStatement != null) preparedStatement.close();
+            } catch (SQLException se) {
+                se.printStackTrace();
+            }
+            try {
+                if (connection != null) connection.close();
+            } catch (SQLException se) {
+                se.printStackTrace();
+            }
         }
     }
 
     @Override
     public void update(Manufacturers manufacturers) {
+        PreparedStatement preparedStatement = null;
         Connection connection = ConnectionUtil.getConnection();
         try {
-            PreparedStatement preparedStatement = connection.prepareStatement("UPDATE manufacturers SET manufacturerName=?, " +
+            preparedStatement = connection.prepareStatement("UPDATE manufacturers SET manufacturerName=?, " +
                     "manufacturerContact=?WHERE idmanufacturer=?");
             preparedStatement.setString(1, manufacturers.getManufacturerName());
             preparedStatement.setString(2, manufacturers.getManufacturerContact());
@@ -83,14 +131,26 @@ public class ManufacturersDAO implements IManufacturersDAO {
                 logger.info("Update process was failed: " + manufacturers.getManufacturerContact());
         } catch (SQLException e) {
             e.printStackTrace();
+        } finally {
+            try {
+                if (preparedStatement != null) preparedStatement.close();
+            } catch (SQLException se) {
+                se.printStackTrace();
+            }
+            try {
+                if (connection != null) connection.close();
+            } catch (SQLException se) {
+                se.printStackTrace();
+            }
         }
     }
 
     @Override
     public void delete(int id) {
+        PreparedStatement preparedStatement = null;
         Connection connection = ConnectionUtil.getConnection();
         try {
-            PreparedStatement preparedStatement = connection.prepareStatement("DELETE FROM manufacturers " +
+            preparedStatement = connection.prepareStatement("DELETE FROM manufacturers " +
                     "WHERE idmanufacturer=" + id);
             if (preparedStatement.executeUpdate() == 1) {
                 logger.info("Delete process is successful.");
@@ -98,6 +158,17 @@ public class ManufacturersDAO implements IManufacturersDAO {
                 logger.info("Delete process was failed.");
         } catch (SQLException e) {
             e.printStackTrace();
+        } finally {
+            try {
+                if (preparedStatement != null) preparedStatement.close();
+            } catch (SQLException se) {
+                se.printStackTrace();
+            }
+            try {
+                if (connection != null) connection.close();
+            } catch (SQLException se) {
+                se.printStackTrace();
+            }
         }
     }
 }

@@ -25,41 +25,77 @@ public class CustomersCategoriesDAO implements ICustomersCategoriesDAO {
     }
     @Override
     public CustomersCategories getById(int id) {
+        ResultSet resultSet = null;
+        Statement statement = null;
         Connection connection = ConnectionUtil.getConnection();
         try {
-            Statement statement = connection.createStatement();
-            ResultSet resultSet = statement.executeQuery("SELECT * FROM customersCategories WHERE idcustomersCategories=" + id);
+            statement = connection.createStatement();
+            resultSet = statement.executeQuery("SELECT * FROM customersCategories WHERE idcustomersCategories=" + id);
             if (resultSet.next()) {
                 logger.info(getCustomersCategoriesById(resultSet));
                 return getCustomersCategoriesById(resultSet);
             }
         } catch (SQLException e) {
             e.printStackTrace();
+        } finally {
+            try {
+                if (resultSet != null) resultSet.close();
+            } catch (SQLException se) {
+                se.printStackTrace();
+            }
+            try {
+                if (statement != null) statement.close();
+            } catch (SQLException se) {
+                se.printStackTrace();
+            }
+            try {
+                if (connection != null) connection.close();
+            } catch (SQLException se) {
+                se.printStackTrace();
+            }
         }
         return null;
     }
 
     @Override
     public List<CustomersCategories> getAll() {
-        PreparedStatement preparedStatement;
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
         Connection connection = ConnectionUtil.getConnection();
         try {
             preparedStatement = connection.prepareStatement("SELECT * FROM customersCategories");
-            ResultSet resultSet = preparedStatement.executeQuery();
+            resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
                 customersCategories.add(getCustomersCategoriesById(resultSet));
             }
         } catch (SQLException e) {
             e.printStackTrace();
+        } finally {
+            try {
+                if (preparedStatement != null) preparedStatement.close();
+            } catch (SQLException se) {
+                se.printStackTrace();
+            }
+            try {
+                if (connection != null) connection.close();
+            } catch (SQLException se) {
+                se.printStackTrace();
+            }
+            try {
+                if (resultSet != null) resultSet.close();
+            } catch (SQLException se) {
+                se.printStackTrace();
+            }
         }
         return customersCategories;
     }
 
     @Override
     public void add(int id, String customersCategoryType, boolean customersCategoryDiscount) {
+        PreparedStatement preparedStatement = null;
         Connection connection = ConnectionUtil.getConnection();
         try {
-            PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO customersCategories VALUE(default, ?, ?)");
+            preparedStatement = connection.prepareStatement("INSERT INTO customersCategories VALUE(default, ?, ?)");
             preparedStatement.setString(1, customersCategoryType);
             preparedStatement.setBoolean(2, customersCategoryDiscount);
             if (preparedStatement.executeUpdate() == 1) {
@@ -68,14 +104,26 @@ public class CustomersCategoriesDAO implements ICustomersCategoriesDAO {
                 logger.info("Insertion was failed.");
         } catch (SQLException e) {
             e.getMessage();
+        } finally {
+            try {
+                if (preparedStatement != null) preparedStatement.close();
+            } catch (SQLException se) {
+                se.printStackTrace();
+            }
+            try {
+                if (connection != null) connection.close();
+            } catch (SQLException se) {
+                se.printStackTrace();
+            }
         }
     }
 
     @Override
     public void update(CustomersCategories customersCategories) {
+        PreparedStatement preparedStatement = null;
         Connection connection = ConnectionUtil.getConnection();
         try {
-            PreparedStatement preparedStatement = connection.prepareStatement("UPDATE customersCategories SET customersCategoryType=?, " +
+            preparedStatement = connection.prepareStatement("UPDATE customersCategories SET customersCategoryType=?, " +
                     "customersCategoryDiscount=? WHERE idcustomersCategory=?");
             preparedStatement.setString(1, customersCategories.getCustomersCategoryType());
             preparedStatement.setBoolean(2, customersCategories.isCustomersCategoryDiscount());
@@ -88,14 +136,26 @@ public class CustomersCategoriesDAO implements ICustomersCategoriesDAO {
                         customersCategories.getCustomersCategoryType());
         } catch (SQLException e) {
             e.printStackTrace();
+        } finally {
+            try {
+                if (preparedStatement != null) preparedStatement.close();
+            } catch (SQLException se) {
+                se.printStackTrace();
+            }
+            try {
+                if (connection != null) connection.close();
+            } catch (SQLException se) {
+                se.printStackTrace();
+            }
         }
     }
 
     @Override
     public void delete(int id) {
+        PreparedStatement preparedStatement = null;
         Connection connection = ConnectionUtil.getConnection();
         try {
-            PreparedStatement preparedStatement = connection.prepareStatement("DELETE FROM customersCategories " +
+            preparedStatement = connection.prepareStatement("DELETE FROM customersCategories " +
                     "WHERE idcustomersCategories=" + id);
             if (preparedStatement.executeUpdate() == 1) {
                 logger.info("Delete process is successful.");
@@ -103,6 +163,17 @@ public class CustomersCategoriesDAO implements ICustomersCategoriesDAO {
                 logger.info("Delete process was failed.");
         } catch (SQLException e) {
             e.printStackTrace();
+        } finally {
+            try {
+                if (preparedStatement != null) preparedStatement.close();
+            } catch (SQLException se) {
+                se.printStackTrace();
+            }
+            try {
+                if (connection != null) connection.close();
+            } catch (SQLException se) {
+                se.printStackTrace();
+            }
         }
     }
 }

@@ -25,41 +25,77 @@ public class DeliveriesDAO implements IDeliveriesDAO {
     }
     @Override
     public Deliveries getById(int id) {
+        ResultSet resultSet = null;
+        Statement statement = null;
         Connection connection = ConnectionUtil.getConnection();
         try {
-            Statement statement = connection.createStatement();
-            ResultSet resultSet = statement.executeQuery("SELECT * FROM deliveries WHERE iddelivery=" + id);
+            statement = connection.createStatement();
+            resultSet = statement.executeQuery("SELECT * FROM deliveries WHERE iddelivery=" + id);
             if (resultSet.next()) {
                 logger.info(getDeliveriesById(resultSet));
                 return getDeliveriesById(resultSet);
             }
         } catch (SQLException e) {
             e.printStackTrace();
+        } finally {
+            try {
+                if (resultSet != null) resultSet.close();
+            } catch (SQLException se) {
+                se.printStackTrace();
+            }
+            try {
+                if (statement != null) statement.close();
+            } catch (SQLException se) {
+                se.printStackTrace();
+            }
+            try {
+                if (connection != null) connection.close();
+            } catch (SQLException se) {
+                se.printStackTrace();
+            }
         }
         return null;
     }
 
     @Override
     public List<Deliveries> getAll() {
-        PreparedStatement preparedStatement;
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
         Connection connection = ConnectionUtil.getConnection();
         try {
             preparedStatement = connection.prepareStatement("SELECT * FROM deliveries");
-            ResultSet resultSet = preparedStatement.executeQuery();
+            resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
                 deliveries.add(getDeliveriesById(resultSet));
             }
         } catch (SQLException e) {
             e.printStackTrace();
+        } finally {
+            try {
+                if (preparedStatement != null) preparedStatement.close();
+            } catch (SQLException se) {
+                se.printStackTrace();
+            }
+            try {
+                if (connection != null) connection.close();
+            } catch (SQLException se) {
+                se.printStackTrace();
+            }
+            try {
+                if (resultSet != null) resultSet.close();
+            } catch (SQLException se) {
+                se.printStackTrace();
+            }
         }
         return deliveries;
     }
 
     @Override
     public void add(int id, int idAddress, int idUser, LocalDateTime deliveryDataTime, int idEmployee) {
+        PreparedStatement preparedStatement = null;
         Connection connection = ConnectionUtil.getConnection();
         try {
-            PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO manufacturers VALUE(default, ?, ?, ?, ?)");
+            preparedStatement = connection.prepareStatement("INSERT INTO manufacturers VALUE(default, ?, ?, ?, ?)");
             preparedStatement.setInt(1, idAddress);
             preparedStatement.setInt(2, idUser);
             preparedStatement.setTimestamp(3, Timestamp.valueOf(deliveryDataTime));
@@ -70,14 +106,26 @@ public class DeliveriesDAO implements IDeliveriesDAO {
                 logger.info("Insertion was failed.");
         } catch (SQLException e) {
             e.getMessage();
+        } finally {
+            try {
+                if (preparedStatement != null) preparedStatement.close();
+            } catch (SQLException se) {
+                se.printStackTrace();
+            }
+            try {
+                if (connection != null) connection.close();
+            } catch (SQLException se) {
+                se.printStackTrace();
+            }
         }
     }
 
     @Override
     public void update(Deliveries deliveries) {
+        PreparedStatement preparedStatement = null;
         Connection connection = ConnectionUtil.getConnection();
         try {
-            PreparedStatement preparedStatement = connection.prepareStatement("UPDATE deliveries SET idaddresse=?, " +
+            preparedStatement = connection.prepareStatement("UPDATE deliveries SET idaddresse=?, " +
                     "iduser=?, deliveryDateTime=?, idemployee=? WHERE iddeliveryr=?");
             preparedStatement.setInt(1, deliveries.getIdAddress());
             preparedStatement.setInt(2, deliveries.getIdUser());
@@ -90,14 +138,26 @@ public class DeliveriesDAO implements IDeliveriesDAO {
                 logger.info("Update process was failed: " + deliveries.getIdDelivery());
         } catch (SQLException e) {
             e.printStackTrace();
+        } finally {
+            try {
+                if (preparedStatement != null) preparedStatement.close();
+            } catch (SQLException se) {
+                se.printStackTrace();
+            }
+            try {
+                if (connection != null) connection.close();
+            } catch (SQLException se) {
+                se.printStackTrace();
+            }
         }
     }
 
     @Override
     public void delete(int id) {
+        PreparedStatement preparedStatement = null;
         Connection connection = ConnectionUtil.getConnection();
         try {
-            PreparedStatement preparedStatement = connection.prepareStatement("DELETE FROM deliveries " +
+            preparedStatement = connection.prepareStatement("DELETE FROM deliveries " +
                     "WHERE iddelivery=" + id);
             if (preparedStatement.executeUpdate() == 1) {
                 logger.info("Delete process is successful.");
@@ -105,6 +165,17 @@ public class DeliveriesDAO implements IDeliveriesDAO {
                 logger.info("Delete process was failed.");
         } catch (SQLException e) {
             e.printStackTrace();
+        } finally {
+            try {
+                if (preparedStatement != null) preparedStatement.close();
+            } catch (SQLException se) {
+                se.printStackTrace();
+            }
+            try {
+                if (connection != null) connection.close();
+            } catch (SQLException se) {
+                se.printStackTrace();
+            }
         }
     }
 }
