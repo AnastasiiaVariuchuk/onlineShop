@@ -23,6 +23,15 @@ public class Customers {
         this.idCustomerCategory = idCustomerCategory;
     }
 
+    public Customers(String customerName, String customerSurname, String customerCard,
+                     String customerPhoneNumber, int idCustomerCategory) {
+        this.customerName = customerName;
+        this.customerSurname = customerSurname;
+        this.customerCard = customerCard;
+        this.customerPhoneNumber = customerPhoneNumber;
+        this.idCustomerCategory = idCustomerCategory;
+    }
+
     public int getIdCustomer() {
         return idCustomer;
     }

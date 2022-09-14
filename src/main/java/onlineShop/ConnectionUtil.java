@@ -2,10 +2,7 @@ package onlineShop;
 
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.Properties;
 
 public class ConnectionUtil {
@@ -32,22 +29,35 @@ public class ConnectionUtil {
         return connection;
     }
 
-    public static void close(Connection con) {
-        if (con != null) {
-            try {
-                con.close();
-            } catch (SQLException e) {
-                throw new RuntimeException(e);
-            }
+    public static void close(PreparedStatement preparedStatement) {
+        try {
+            if (preparedStatement != null) preparedStatement.close();
+        } catch (SQLException se) {
+            se.printStackTrace();
         }
     }
-    public static void close(Statement stmt) {
-        if (stmt != null) {
-            try {
-                stmt.close();
-            } catch (SQLException e) {
-                throw new RuntimeException(e);
-            }
+
+    public static void close(Connection connection) {
+        try {
+            if (connection != null) connection.close();
+        } catch (SQLException se) {
+            se.printStackTrace();
+        }
+    }
+
+    public static void close(ResultSet resultSet) {
+        try {
+            if (resultSet != null) resultSet.close();
+        } catch (SQLException se) {
+            se.printStackTrace();
+        }
+    }
+
+    public static void close(Statement statement) {
+        try {
+            if (statement != null) statement.close();
+        } catch (SQLException se) {
+            se.printStackTrace();
         }
     }
 }

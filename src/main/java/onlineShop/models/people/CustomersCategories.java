@@ -16,6 +16,11 @@ public class CustomersCategories {
         this.customersCategoryDiscount = customersCategoryDiscount;
     }
 
+    public CustomersCategories( String customersCategoryType, boolean customersCategoryDiscount) {
+        this.customersCategoryType = customersCategoryType;
+        this.customersCategoryDiscount = customersCategoryDiscount;
+    }
+
     public int getIdCustomersCategory() {
         return idCustomersCategory;
     }

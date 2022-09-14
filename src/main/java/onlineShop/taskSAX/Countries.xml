@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<countries>
+    <country id="20">
+        <name>Australia</name>
+    </country>
+    <country id="21">
+        <name>Argentina</name>
+    </country>
+    <country id="22">
+        <name>Belarus</name>
+    </country>
+    <country id="23">
+        <name>China</name>
+    </country>
+</countries>
