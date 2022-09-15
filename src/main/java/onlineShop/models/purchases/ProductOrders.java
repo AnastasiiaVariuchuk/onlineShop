@@ -16,6 +16,11 @@ public class ProductOrders {
         this.idShoppingOrder = idShoppingOrder;
     }
 
+    public ProductOrders(int idProduct, int idShoppingOrder) {
+        this.idProduct = idProduct;
+        this.idShoppingOrder = idShoppingOrder;
+    }
+
     public int getIdProductOrder() {
         return idProductOrder;
     }

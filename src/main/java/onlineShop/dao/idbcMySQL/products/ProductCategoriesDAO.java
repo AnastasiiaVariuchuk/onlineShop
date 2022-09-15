@@ -12,8 +12,6 @@ import java.util.List;
 
 public class ProductCategoriesDAO implements IProductCategoriesDAO {
     private static final Logger logger = LogManager.getLogger(ProductCategoriesDAO.class);
-    List<ProductCategories> productCategories = new LinkedList<>();
-
     private ProductCategories getProductCategoriesById(ResultSet resultSet) throws SQLException {
         ProductCategories productCategories1 = new ProductCategories();
         productCategories1.setIdProductCategory(resultSet.getInt("idProductCategorie"));
@@ -36,27 +34,16 @@ public class ProductCategoriesDAO implements IProductCategoriesDAO {
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
-            try {
-                if (resultSet != null) resultSet.close();
-            } catch (SQLException se) {
-                se.printStackTrace();
-            }
-            try {
-                if (statement != null) statement.close();
-            } catch (SQLException se) {
-                se.printStackTrace();
-            }
-            try {
-                if (connection != null) connection.close();
-            } catch (SQLException se) {
-                se.printStackTrace();
-            }
+            ConnectionUtil.close(resultSet);
+            ConnectionUtil.close(statement);
+            ConnectionUtil.close(connection);
         }
         return null;
     }
 
     @Override
     public List<ProductCategories> getAll() {
+        List<ProductCategories> productCategories = new LinkedList<>();
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
         Connection connection = ConnectionUtil.getConnection();
@@ -69,21 +56,9 @@ public class ProductCategoriesDAO implements IProductCategoriesDAO {
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
-            try {
-                if (preparedStatement != null) preparedStatement.close();
-            } catch (SQLException se) {
-                se.printStackTrace();
-            }
-            try {
-                if (connection != null) connection.close();
-            } catch (SQLException se) {
-                se.printStackTrace();
-            }
-            try {
-                if (resultSet != null) resultSet.close();
-            } catch (SQLException se) {
-                se.printStackTrace();
-            }
+            ConnectionUtil.close(resultSet);
+            ConnectionUtil.close(preparedStatement);
+            ConnectionUtil.close(connection);
         }
         return productCategories;
     }
@@ -102,16 +77,27 @@ public class ProductCategoriesDAO implements IProductCategoriesDAO {
         } catch (SQLException e) {
             e.getMessage();
         } finally {
-            try {
-                if (preparedStatement != null) preparedStatement.close();
-            } catch (SQLException se) {
-                se.printStackTrace();
-            }
-            try {
-                if (connection != null) connection.close();
-            } catch (SQLException se) {
-                se.printStackTrace();
-            }
+            ConnectionUtil.close(preparedStatement);
+            ConnectionUtil.close(connection);
+        }
+    }
+
+    @Override
+    public void add(ProductCategories productCategories) {
+        PreparedStatement preparedStatement = null;
+        Connection connection = ConnectionUtil.getConnection();
+        try {
+            preparedStatement = connection.prepareStatement("INSERT INTO productCategories VALUE(default, ?)");
+            preparedStatement.setString(1, productCategories.getProductCategoryName());
+            if (preparedStatement.executeUpdate() == 1) {
+                logger.info("Insertion is successful.");
+            } else
+                logger.info("Insertion was failed.");
+        } catch (SQLException e) {
+            e.getMessage();
+        } finally {
+            ConnectionUtil.close(preparedStatement);
+            ConnectionUtil.close(connection);
         }
     }
 
@@ -131,16 +117,8 @@ public class ProductCategoriesDAO implements IProductCategoriesDAO {
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
-            try {
-                if (preparedStatement != null) preparedStatement.close();
-            } catch (SQLException se) {
-                se.printStackTrace();
-            }
-            try {
-                if (connection != null) connection.close();
-            } catch (SQLException se) {
-                se.printStackTrace();
-            }
+            ConnectionUtil.close(preparedStatement);
+            ConnectionUtil.close(connection);
         }
     }
 
@@ -158,16 +136,8 @@ public class ProductCategoriesDAO implements IProductCategoriesDAO {
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
-            try {
-                if (preparedStatement != null) preparedStatement.close();
-            } catch (SQLException se) {
-                se.printStackTrace();
-            }
-            try {
-                if (connection != null) connection.close();
-            } catch (SQLException se) {
-                se.printStackTrace();
-            }
+            ConnectionUtil.close(preparedStatement);
+            ConnectionUtil.close(connection);
         }
     }
 }

@@ -12,6 +12,8 @@ public interface IDeliveriesDAO {
 
     void add(int id, int idAddress, int idUser, LocalDateTime deliveryDataTime, int idEmployee);
 
+    void add(Deliveries deliveries);
+
     void update(Deliveries deliveries);
 
     void delete(int id);

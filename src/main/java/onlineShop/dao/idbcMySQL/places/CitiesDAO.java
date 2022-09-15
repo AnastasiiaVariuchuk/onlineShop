@@ -13,8 +13,6 @@ import java.sql.*;
 
 public class CitiesDAO implements ICitiesDAO {
     private static final Logger logger = LogManager.getLogger(CitiesDAO.class);
-    List<Cities> cities = new LinkedList<>();
-
     private Cities getCityById(ResultSet resultSet) throws SQLException {
         Cities cities1 = new Cities();
         cities1.setIdCity(resultSet.getInt("idcity"));
@@ -39,27 +37,16 @@ public class CitiesDAO implements ICitiesDAO {
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
-            try {
-                if (resultSet != null) resultSet.close();
-            } catch (SQLException se) {
-                se.printStackTrace();
-            }
-            try {
-                if (statement != null) statement.close();
-            } catch (SQLException se) {
-                se.printStackTrace();
-            }
-            try {
-                if (connection != null) connection.close();
-            } catch (SQLException se) {
-                se.printStackTrace();
-            }
+            ConnectionUtil.close(resultSet);
+            ConnectionUtil.close(statement);
+            ConnectionUtil.close(connection);
         }
         return null;
     }
 
     @Override
     public List<Cities> getAll() {
+        List<Cities> cities = new LinkedList<>();
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
         Connection connection = ConnectionUtil.getConnection();
@@ -72,21 +59,9 @@ public class CitiesDAO implements ICitiesDAO {
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
-            try {
-                if (preparedStatement != null) preparedStatement.close();
-            } catch (SQLException se) {
-                se.printStackTrace();
-            }
-            try {
-                if (connection != null) connection.close();
-            } catch (SQLException se) {
-                se.printStackTrace();
-            }
-            try {
-                if (resultSet != null) resultSet.close();
-            } catch (SQLException se) {
-                se.printStackTrace();
-            }
+            ConnectionUtil.close(resultSet);
+            ConnectionUtil.close(preparedStatement);
+            ConnectionUtil.close(connection);
         }
         return cities;
     }
@@ -107,16 +82,29 @@ public class CitiesDAO implements ICitiesDAO {
         } catch (SQLException e) {
             e.getMessage();
         } finally {
-            try {
-                if (preparedStatement != null) preparedStatement.close();
-            } catch (SQLException se) {
-                se.printStackTrace();
-            }
-            try {
-                if (connection != null) connection.close();
-            } catch (SQLException se) {
-                se.printStackTrace();
-            }
+            ConnectionUtil.close(preparedStatement);
+            ConnectionUtil.close(connection);
+        }
+    }
+
+    @Override
+    public void add(Cities cities) {
+        PreparedStatement preparedStatement = null;
+        Connection connection = ConnectionUtil.getConnection();
+        try {
+            preparedStatement = connection.prepareStatement("INSERT INTO cities VALUE(default, ?, ?, ?)");
+            preparedStatement.setString(1, cities.getCityName());
+            preparedStatement.setString(2, cities.getCityPostalCode());
+            preparedStatement.setInt(3, cities.getIdCountry());
+            if (preparedStatement.executeUpdate() == 1) {
+                logger.info("Insertion is successful.");
+            } else
+                logger.info("Insertion was failed.");
+        } catch (SQLException e) {
+            e.getMessage();
+        } finally {
+            ConnectionUtil.close(preparedStatement);
+            ConnectionUtil.close(connection);
         }
     }
 
@@ -138,16 +126,8 @@ public class CitiesDAO implements ICitiesDAO {
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
-            try {
-                if (preparedStatement != null) preparedStatement.close();
-            } catch (SQLException se) {
-                se.printStackTrace();
-            }
-            try {
-                if (connection != null) connection.close();
-            } catch (SQLException se) {
-                se.printStackTrace();
-            }
+            ConnectionUtil.close(preparedStatement);
+            ConnectionUtil.close(connection);
         }
     }
 
@@ -164,16 +144,8 @@ public class CitiesDAO implements ICitiesDAO {
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
-            try {
-                if (preparedStatement != null) preparedStatement.close();
-            } catch (SQLException se) {
-                se.printStackTrace();
-            }
-            try {
-                if (connection != null) connection.close();
-            } catch (SQLException se) {
-                se.printStackTrace();
-            }
+            ConnectionUtil.close(preparedStatement);
+            ConnectionUtil.close(connection);
         }
     }
 }

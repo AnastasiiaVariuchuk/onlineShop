@@ -12,6 +12,8 @@ public interface ICitiesDAO {
 
     void add(int id, String cityName, String cityPostalCode, int idCountry);
 
+    void add(Cities cities);
+
     void update(Cities cities);
 
     void delete(int id);

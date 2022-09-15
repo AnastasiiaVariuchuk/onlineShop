@@ -13,7 +13,6 @@ import java.util.List;
 
 public class DeliveriesDAO implements IDeliveriesDAO {
     private static final Logger logger = LogManager.getLogger(DeliveriesDAO.class);
-    List<Deliveries> deliveries = new LinkedList<>();
     private Deliveries getDeliveriesById(ResultSet resultSet) throws SQLException {
         Deliveries deliveries1 = new Deliveries();
         deliveries1.setIdDelivery(resultSet.getInt("iddelivery"));
@@ -38,27 +37,16 @@ public class DeliveriesDAO implements IDeliveriesDAO {
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
-            try {
-                if (resultSet != null) resultSet.close();
-            } catch (SQLException se) {
-                se.printStackTrace();
-            }
-            try {
-                if (statement != null) statement.close();
-            } catch (SQLException se) {
-                se.printStackTrace();
-            }
-            try {
-                if (connection != null) connection.close();
-            } catch (SQLException se) {
-                se.printStackTrace();
-            }
+            ConnectionUtil.close(resultSet);
+            ConnectionUtil.close(statement);
+            ConnectionUtil.close(connection);
         }
         return null;
     }
 
     @Override
     public List<Deliveries> getAll() {
+        List<Deliveries> deliveries = new LinkedList<>();
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
         Connection connection = ConnectionUtil.getConnection();
@@ -71,21 +59,9 @@ public class DeliveriesDAO implements IDeliveriesDAO {
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
-            try {
-                if (preparedStatement != null) preparedStatement.close();
-            } catch (SQLException se) {
-                se.printStackTrace();
-            }
-            try {
-                if (connection != null) connection.close();
-            } catch (SQLException se) {
-                se.printStackTrace();
-            }
-            try {
-                if (resultSet != null) resultSet.close();
-            } catch (SQLException se) {
-                se.printStackTrace();
-            }
+            ConnectionUtil.close(resultSet);
+            ConnectionUtil.close(preparedStatement);
+            ConnectionUtil.close(connection);
         }
         return deliveries;
     }
@@ -107,16 +83,30 @@ public class DeliveriesDAO implements IDeliveriesDAO {
         } catch (SQLException e) {
             e.getMessage();
         } finally {
-            try {
-                if (preparedStatement != null) preparedStatement.close();
-            } catch (SQLException se) {
-                se.printStackTrace();
-            }
-            try {
-                if (connection != null) connection.close();
-            } catch (SQLException se) {
-                se.printStackTrace();
-            }
+            ConnectionUtil.close(preparedStatement);
+            ConnectionUtil.close(connection);
+        }
+    }
+
+    @Override
+    public void add(Deliveries deliveries) {
+        PreparedStatement preparedStatement = null;
+        Connection connection = ConnectionUtil.getConnection();
+        try {
+            preparedStatement = connection.prepareStatement("INSERT INTO manufacturers VALUE(default, ?, ?, ?, ?)");
+            preparedStatement.setInt(1, deliveries.getIdAddress());
+            preparedStatement.setInt(2, deliveries.getIdUser());
+            preparedStatement.setTimestamp(3, deliveries.getDeliveryDataTime());
+            preparedStatement.setInt(4, deliveries.getIdEmployee());
+            if (preparedStatement.executeUpdate() == 1) {
+                logger.info("Insertion is successful.");
+            } else
+                logger.info("Insertion was failed.");
+        } catch (SQLException e) {
+            e.getMessage();
+        } finally {
+            ConnectionUtil.close(preparedStatement);
+            ConnectionUtil.close(connection);
         }
     }
 
@@ -139,16 +129,8 @@ public class DeliveriesDAO implements IDeliveriesDAO {
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
-            try {
-                if (preparedStatement != null) preparedStatement.close();
-            } catch (SQLException se) {
-                se.printStackTrace();
-            }
-            try {
-                if (connection != null) connection.close();
-            } catch (SQLException se) {
-                se.printStackTrace();
-            }
+            ConnectionUtil.close(preparedStatement);
+            ConnectionUtil.close(connection);
         }
     }
 
@@ -166,16 +148,8 @@ public class DeliveriesDAO implements IDeliveriesDAO {
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
-            try {
-                if (preparedStatement != null) preparedStatement.close();
-            } catch (SQLException se) {
-                se.printStackTrace();
-            }
-            try {
-                if (connection != null) connection.close();
-            } catch (SQLException se) {
-                se.printStackTrace();
-            }
+            ConnectionUtil.close(preparedStatement);
+            ConnectionUtil.close(connection);
         }
     }
 }

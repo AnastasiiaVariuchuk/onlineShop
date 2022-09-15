@@ -21,6 +21,14 @@ public class Employees {
         this.employeeSalary = employeeSalary;
     }
 
+    public Employees(String employeeName, String employeeSurname, String employeeContact,
+                     double employeeSalary) {
+        this.employeeName = employeeName;
+        this.employeeSurname = employeeSurname;
+        this.employeeContact = employeeContact;
+        this.employeeSalary = employeeSalary;
+    }
+
     public int getIdEmployee() {
         return idEmployee;
     }

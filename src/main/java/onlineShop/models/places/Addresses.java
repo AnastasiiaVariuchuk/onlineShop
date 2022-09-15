@@ -18,6 +18,12 @@ public class Addresses {
         this.idCity = idCity;
     }
 
+    public Addresses(String addressName, String addressPostalCode, int idCity) {
+        this.addressName = addressName;
+        this.addressPostalCode = addressPostalCode;
+        this.idCity = idCity;
+    }
+
     public int getIdAddress() {
         return idAddress;
     }

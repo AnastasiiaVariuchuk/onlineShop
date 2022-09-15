@@ -12,6 +12,8 @@ public interface IUsersDAO {
 
     void add(int id, String userName, String userEmail, String userPassword, int idCustomer);
 
+    void add(Users users);
+
     void update(Users users);
 
     void delete(int id);

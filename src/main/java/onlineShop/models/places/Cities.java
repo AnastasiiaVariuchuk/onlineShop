@@ -16,6 +16,12 @@ public class Cities {
         this.idCountry = idCountry;
     }
 
+    public Cities(String cityName, String cityPostalCode, int idCountry) {
+        this.cityName = cityName;
+        this.cityPostalCode = cityPostalCode;
+        this.idCountry = idCountry;
+    }
+
     public int getIdCity() {
         return idCity;
     }

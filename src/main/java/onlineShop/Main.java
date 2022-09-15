@@ -29,7 +29,7 @@ public class Main {
         List<Countries> countries = CountryDAO.getAll();
         logger.info(countries);
 
-        //CountryDAO.add(3,"Canada");
+        //CountryDAO.add(new Countries("Ukraine"));
 
         CountryDAO.getById(8);
 

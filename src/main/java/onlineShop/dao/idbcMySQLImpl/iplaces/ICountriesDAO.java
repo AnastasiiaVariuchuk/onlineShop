@@ -12,6 +12,8 @@ public interface ICountriesDAO {
 
     void add(int id, String countryName);
 
+    void add(Countries countries);
+
     void update(Countries countries);
 
     void delete(int id);

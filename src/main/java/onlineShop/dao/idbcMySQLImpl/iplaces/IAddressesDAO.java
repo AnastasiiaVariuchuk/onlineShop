@@ -11,6 +11,8 @@ public interface IAddressesDAO {
 
     void add(int id, String addressName, String addressPostalCode, int idCity);
 
+    void add(Addresses addresses);
+
     void update(Addresses addresses);
 
     void delete(int id);

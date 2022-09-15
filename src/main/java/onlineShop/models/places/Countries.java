@@ -14,6 +14,10 @@ public class Countries {
         this.countryName = countryName;
     }
 
+    public Countries(String countryName) {
+        this.countryName = countryName;
+    }
+
     public int getIdCountry() {
         return idCountry;
     }

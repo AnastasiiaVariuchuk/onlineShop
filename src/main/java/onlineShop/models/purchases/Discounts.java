@@ -14,6 +14,10 @@ public class Discounts {
         this.discountSize = discountSize;
     }
 
+    public Discounts(double discountSize) {
+        this.discountSize = discountSize;
+    }
+
     public int getIdDiscount() {
         return idDiscount;
     }

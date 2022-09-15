@@ -13,6 +13,8 @@ public interface IProductsDAO {
     void add(int id, String productName, String productDescription, int idProductCategory,
              float productPrice, int idManufacturer, int idDiscount);
 
+    void add(Products products);
+
     void update(Products products);
 
     void delete(int id);

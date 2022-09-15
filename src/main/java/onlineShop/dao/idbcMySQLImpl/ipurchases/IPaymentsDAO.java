@@ -12,6 +12,8 @@ public interface IPaymentsDAO {
 
     void add(int id, int idCustomer, Timestamp paymentDateTime, boolean paymentStatus);
 
+    void add(Payments payments);
+
     void update(Payments payments);
 
     void delete(int id);

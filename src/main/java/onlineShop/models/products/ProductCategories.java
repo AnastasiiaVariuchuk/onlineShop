@@ -14,6 +14,10 @@ public class ProductCategories {
         this.productCategoryName = productCategoryName;
     }
 
+    public ProductCategories(String productCategoryName) {
+        this.productCategoryName = productCategoryName;
+    }
+
     public int getIdProductCategory() {
         return idProductCategory;
     }

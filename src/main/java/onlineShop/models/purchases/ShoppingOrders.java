@@ -20,6 +20,12 @@ public class ShoppingOrders {
         this.idUser = idUser;
     }
 
+    public ShoppingOrders(Date shoppingOrderDate, double shoppingOrderTotalPrice, int idUser) {
+        this.shoppingOrderDate = shoppingOrderDate;
+        this.shoppingOrderTotalPrice = shoppingOrderTotalPrice;
+        this.idUser = idUser;
+    }
+
     public int getIdShoppingOrder() {
         return idShoppingOrder;
     }

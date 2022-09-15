@@ -2,7 +2,6 @@ package onlineShop.dao.idbcMySQL.purchases;
 
 import onlineShop.ConnectionUtil;
 import onlineShop.dao.idbcMySQLImpl.ipurchases.IShoppingOrdersDAO;
-import onlineShop.models.purchases.ProductOrders;
 import onlineShop.models.purchases.ShoppingOrders;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -14,7 +13,6 @@ import java.util.List;
 
 public class ShoppingOrdersDAO implements IShoppingOrdersDAO {
     private static final Logger logger = LogManager.getLogger(ShoppingOrdersDAO.class);
-    List<ShoppingOrders> shoppingOrders = new LinkedList<>();
     private ShoppingOrders getShoppingOrdersById(ResultSet resultSet) throws SQLException {
         ShoppingOrders shoppingOrders1 = new ShoppingOrders();
         shoppingOrders1.setIdShoppingOrder(resultSet.getInt("idshoppingOrder"));
@@ -38,27 +36,16 @@ public class ShoppingOrdersDAO implements IShoppingOrdersDAO {
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
-            try {
-                if (resultSet != null) resultSet.close();
-            } catch (SQLException se) {
-                se.printStackTrace();
-            }
-            try {
-                if (statement != null) statement.close();
-            } catch (SQLException se) {
-                se.printStackTrace();
-            }
-            try {
-                if (connection != null) connection.close();
-            } catch (SQLException se) {
-                se.printStackTrace();
-            }
+            ConnectionUtil.close(resultSet);
+            ConnectionUtil.close(statement);
+            ConnectionUtil.close(connection);
         }
         return null;
     }
 
     @Override
     public List<ShoppingOrders> getAll() {
+        List<ShoppingOrders> shoppingOrders = new LinkedList<>();
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
         Connection connection = ConnectionUtil.getConnection();
@@ -71,21 +58,9 @@ public class ShoppingOrdersDAO implements IShoppingOrdersDAO {
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
-            try {
-                if (preparedStatement != null) preparedStatement.close();
-            } catch (SQLException se) {
-                se.printStackTrace();
-            }
-            try {
-                if (connection != null) connection.close();
-            } catch (SQLException se) {
-                se.printStackTrace();
-            }
-            try {
-                if (resultSet != null) resultSet.close();
-            } catch (SQLException se) {
-                se.printStackTrace();
-            }
+            ConnectionUtil.close(resultSet);
+            ConnectionUtil.close(preparedStatement);
+            ConnectionUtil.close(connection);
         }
         return shoppingOrders;
     }
@@ -106,16 +81,29 @@ public class ShoppingOrdersDAO implements IShoppingOrdersDAO {
         } catch (SQLException e) {
             e.getMessage();
         } finally {
-            try {
-                if (preparedStatement != null) preparedStatement.close();
-            } catch (SQLException se) {
-                se.printStackTrace();
-            }
-            try {
-                if (connection != null) connection.close();
-            } catch (SQLException se) {
-                se.printStackTrace();
-            }
+            ConnectionUtil.close(preparedStatement);
+            ConnectionUtil.close(connection);
+        }
+    }
+
+    @Override
+    public void add(ShoppingOrders shoppingOrders) {
+        PreparedStatement preparedStatement = null;
+        Connection connection = ConnectionUtil.getConnection();
+        try {
+            preparedStatement = connection.prepareStatement("INSERT INTO shoppingOrders VALUE(default, ?, ?, ?)");
+            preparedStatement.setDate(1, (java.sql.Date) shoppingOrders.getShoppingOrderDate());
+            preparedStatement.setDouble(2, shoppingOrders.getShoppingOrderTotalPrice());
+            preparedStatement.setInt(3, shoppingOrders.getIdUser());
+            if (preparedStatement.executeUpdate() == 1) {
+                logger.info("Insertion is successful.");
+            } else
+                logger.info("Insertion was failed.");
+        } catch (SQLException e) {
+            e.getMessage();
+        } finally {
+            ConnectionUtil.close(preparedStatement);
+            ConnectionUtil.close(connection);
         }
     }
 
@@ -137,16 +125,8 @@ public class ShoppingOrdersDAO implements IShoppingOrdersDAO {
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
-            try {
-                if (preparedStatement != null) preparedStatement.close();
-            } catch (SQLException se) {
-                se.printStackTrace();
-            }
-            try {
-                if (connection != null) connection.close();
-            } catch (SQLException se) {
-                se.printStackTrace();
-            }
+            ConnectionUtil.close(preparedStatement);
+            ConnectionUtil.close(connection);
         }
     }
 
@@ -164,16 +144,8 @@ public class ShoppingOrdersDAO implements IShoppingOrdersDAO {
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
-            try {
-                if (preparedStatement != null) preparedStatement.close();
-            } catch (SQLException se) {
-                se.printStackTrace();
-            }
-            try {
-                if (connection != null) connection.close();
-            } catch (SQLException se) {
-                se.printStackTrace();
-            }
+            ConnectionUtil.close(preparedStatement);
+            ConnectionUtil.close(connection);
         }
     }
 }

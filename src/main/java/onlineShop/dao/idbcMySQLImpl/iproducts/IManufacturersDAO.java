@@ -12,6 +12,8 @@ public interface IManufacturersDAO {
 
     void add(int id, String manufacturerName, String manufacturerContact);
 
+    void add(Manufacturers manufacturers);
+
     void update(Manufacturers manufacturers);
 
     void delete(int id);

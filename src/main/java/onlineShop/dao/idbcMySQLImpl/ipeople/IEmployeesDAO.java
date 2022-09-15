@@ -12,6 +12,8 @@ public interface IEmployeesDAO {
 
     void add(int id, String employeeName, String employeeSurname, String employeeContact, double employeeSalary);
 
+    void add(Employees employees);
+
     void update(Employees employees);
 
     void delete(int id);

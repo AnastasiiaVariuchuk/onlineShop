@@ -12,6 +12,8 @@ public interface IProductCategoriesDAO {
 
     void add(int id, String productCategoryName);
 
+    void add(ProductCategories productCategories);
+
     void update(ProductCategories productCategories);
 
     void delete(int id);

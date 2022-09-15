@@ -20,6 +20,12 @@ public class Payments {
         this.paymentStatus = paymentStatus;
     }
 
+    public Payments(int idCustomer, Timestamp paymentDateTime, boolean paymentStatus) {
+        this.idCustomer = idCustomer;
+        this.paymentDateTime = paymentDateTime;
+        this.paymentStatus = paymentStatus;
+    }
+
     public int getIdPayment() {
         return idPayment;
     }

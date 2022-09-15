@@ -16,6 +16,11 @@ public class Manufacturers {
         this.manufacturerContact = manufacturerContact;
     }
 
+    public Manufacturers(String manufacturerName, String manufacturerContact) {
+        this.manufacturerName = manufacturerName;
+        this.manufacturerContact = manufacturerContact;
+    }
+
     public int getIdManufacturer() {
         return idManufacturer;
     }

@@ -10,6 +10,7 @@ public interface IProductOrdersDAO {
     List<ProductOrders> getAll();
 
     void add(int id, int idProduct, int idShoppingOrder);
+    void add(ProductOrders productOrders);
 
     void update(ProductOrders productOrders);
 

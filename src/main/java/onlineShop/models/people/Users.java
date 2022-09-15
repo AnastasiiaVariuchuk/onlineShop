@@ -20,6 +20,13 @@ public class Users {
         this.idCustomer = idCustomer;
     }
 
+    public Users(String userName, String userEmail, String userPassword, int idCustomer) {
+        this.userName = userName;
+        this.userEmail = userEmail;
+        this.userPassword = userPassword;
+        this.idCustomer = idCustomer;
+    }
+
     public int getIdUser() {
         return idUser;
     }

@@ -22,6 +22,13 @@ public class Deliveries {
         this.idEmployee = idEmployee;
     }
 
+    public Deliveries(int idAddress, int idUser, Timestamp deliveryDataTime, int idEmployee) {
+        this.idAddress = idAddress;
+        this.idUser = idUser;
+        this.deliveryDataTime = deliveryDataTime;
+        this.idEmployee = idEmployee;
+    }
+
     public int getIdDelivery() {
         return idDelivery;
     }

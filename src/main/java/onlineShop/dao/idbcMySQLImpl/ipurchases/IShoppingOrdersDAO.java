@@ -14,6 +14,8 @@ public interface IShoppingOrdersDAO {
 
     void add(int id, Date shoppingOrderDate, double shoppingOrderTotalPrice, int idUser);
 
+    void add(ShoppingOrders shoppingOrders);
+
     void update(ShoppingOrders shoppingOrders);
 
     void delete(int id);

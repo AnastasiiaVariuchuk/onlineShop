@@ -25,6 +25,16 @@ public class Products {
         this.idDiscount = idDiscount;
     }
 
+    public Products(String productName, String productDescription, int idProductCategory,
+                    float productPrice, int idManufacturer, int idDiscount) {
+        this.productName = productName;
+        this.productDescription = productDescription;
+        this.idProductCategory = idProductCategory;
+        this.productPrice = productPrice;
+        this.idManufacturer = idManufacturer;
+        this.idDiscount = idDiscount;
+    }
+
     public int getIdProduct() {
         return idProduct;
     }
