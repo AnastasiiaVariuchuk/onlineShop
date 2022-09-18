@@ -64,25 +64,6 @@ public class ProductCategoriesDAO implements IProductCategoriesDAO {
     }
 
     @Override
-    public void add(int id, String productCategoryName) {
-        PreparedStatement preparedStatement = null;
-        Connection connection = ConnectionUtil.getConnection();
-        try {
-            preparedStatement = connection.prepareStatement("INSERT INTO productCategories VALUE(default, ?)");
-            preparedStatement.setString(1, productCategoryName);
-            if (preparedStatement.executeUpdate() == 1) {
-                logger.info("Insertion is successful.");
-            } else
-                logger.info("Insertion was failed.");
-        } catch (SQLException e) {
-            e.getMessage();
-        } finally {
-            ConnectionUtil.close(preparedStatement);
-            ConnectionUtil.close(connection);
-        }
-    }
-
-    @Override
     public void add(ProductCategories productCategories) {
         PreparedStatement preparedStatement = null;
         Connection connection = ConnectionUtil.getConnection();

@@ -67,27 +67,6 @@ public class PaymentsDAO implements IPaymentsDAO {
     }
 
     @Override
-    public void add(int id, int idCustomer, Timestamp paymentDateTime, boolean paymentStatus) {
-        PreparedStatement preparedStatement = null;
-        Connection connection = ConnectionUtil.getConnection();
-        try {
-            preparedStatement = connection.prepareStatement("INSERT INTO payments VALUE(default, ?, ?, ?)");
-            preparedStatement.setInt(1, idCustomer);
-            preparedStatement.setTimestamp(2, paymentDateTime);
-            preparedStatement.setBoolean(3, paymentStatus);
-            if (preparedStatement.executeUpdate() == 1) {
-                logger.info("Insertion is successful.");
-            } else
-                logger.info("Insertion was failed.");
-        } catch (SQLException e) {
-            e.getMessage();
-        } finally {
-            ConnectionUtil.close(preparedStatement);
-            ConnectionUtil.close(connection);
-        }
-    }
-
-    @Override
     public void add(Payments payments) {
         PreparedStatement preparedStatement = null;
         Connection connection = ConnectionUtil.getConnection();

@@ -15,11 +15,11 @@ VALUES(4, 'Los Angeles', '004',1);
 
 INSERT manufacturers(idmanufacturer, manufacturerName, manufacturerContact)
 VALUES(1, 'Best cosmetics', 'bestcosmetics@gmail.com');
-INSERT manufacturers(idmanufacturer, manufacturerName, manufacturerConact)
+INSERT manufacturers(idmanufacturer, manufacturerName, manufacturerContact)
 VALUES(2, 'Apple', 'apple@gmail.com');
-INSERT manufacturers(idmanufacturer, manufacturerName, manufacturerConact)
+INSERT manufacturers(idmanufacturer, manufacturerName, manufacturerContact)
 VALUES(3, 'Hair style', 'hairstyle@gmail.com');
-INSERT manufacturers(idmanufacturer, manufacturerName, manufacturerConact)
+INSERT manufacturers(idmanufacturer, manufacturerName, manufacturerContact)
 VALUES(4, 'Sumsung', 'samsungs@gmail.com');
 
 INSERT addresses(idaddresse, addresseName, addressePostalCode, idcity)

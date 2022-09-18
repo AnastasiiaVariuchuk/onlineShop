@@ -1,12 +1,11 @@
 package onlineShop.taskJAXB;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.*;
 
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlRootElement(name = "employee")
-public class EmployeeJABX {
+@XmlType(propOrder = { "employeeName", "employeeSurname", "employeeContact", "employeeSalary" })
+public class EmployeeJAXB {
     private String employeeName;
     private String employeeSurname;
     private String employeeContact;

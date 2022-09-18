@@ -66,27 +66,6 @@ public class ShoppingOrdersDAO implements IShoppingOrdersDAO {
     }
 
     @Override
-    public void add(int id, Date shoppingOrderDate, double shoppingOrderTotalPrice, int idUser) {
-        PreparedStatement preparedStatement = null;
-        Connection connection = ConnectionUtil.getConnection();
-        try {
-            preparedStatement = connection.prepareStatement("INSERT INTO shoppingOrders VALUE(default, ?, ?, ?)");
-            preparedStatement.setDate(1, (java.sql.Date) shoppingOrderDate);
-            preparedStatement.setDouble(2, shoppingOrderTotalPrice);
-            preparedStatement.setInt(3, idUser);
-            if (preparedStatement.executeUpdate() == 1) {
-                logger.info("Insertion is successful.");
-            } else
-                logger.info("Insertion was failed.");
-        } catch (SQLException e) {
-            e.getMessage();
-        } finally {
-            ConnectionUtil.close(preparedStatement);
-            ConnectionUtil.close(connection);
-        }
-    }
-
-    @Override
     public void add(ShoppingOrders shoppingOrders) {
         PreparedStatement preparedStatement = null;
         Connection connection = ConnectionUtil.getConnection();

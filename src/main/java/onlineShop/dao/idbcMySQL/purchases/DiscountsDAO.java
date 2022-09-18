@@ -63,25 +63,6 @@ public class DiscountsDAO implements IDiscountsDAO {
     }
 
     @Override
-    public void add(int id, double discountSize) {
-        PreparedStatement preparedStatement = null;
-        Connection connection = ConnectionUtil.getConnection();
-        try {
-            preparedStatement = connection.prepareStatement("INSERT INTO discounts VALUE(default, ?)");
-            preparedStatement.setDouble(1, discountSize);
-            if (preparedStatement.executeUpdate() == 1) {
-                logger.info("Insertion is successful.");
-            } else
-                logger.info("Insertion was failed.");
-        } catch (SQLException e) {
-            e.getMessage();
-        } finally {
-            ConnectionUtil.close(preparedStatement);
-            ConnectionUtil.close(connection);
-        }
-    }
-
-    @Override
     public void add(Discounts discounts) {
         PreparedStatement preparedStatement = null;
         Connection connection = ConnectionUtil.getConnection();

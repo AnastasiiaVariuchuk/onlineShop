@@ -64,26 +64,6 @@ public class ProductOrdersDAO implements IProductOrdersDAO {
     }
 
     @Override
-    public void add(int id, int idProduct, int idShoppingOrder) {
-        PreparedStatement preparedStatement = null;
-        Connection connection = ConnectionUtil.getConnection();
-        try {
-            preparedStatement = connection.prepareStatement("INSERT INTO productorders VALUE(default, ?, ?)");
-            preparedStatement.setInt(1, idProduct);
-            preparedStatement.setInt(2, idShoppingOrder);
-            if (preparedStatement.executeUpdate() == 1) {
-                logger.info("Insertion is successful.");
-            } else
-                logger.info("Insertion was failed.");
-        } catch (SQLException e) {
-            e.getMessage();
-        } finally {
-            ConnectionUtil.close(preparedStatement);
-            ConnectionUtil.close(connection);
-        }
-    }
-
-    @Override
     public void add(ProductOrders productOrders) {
         PreparedStatement preparedStatement = null;
         Connection connection = ConnectionUtil.getConnection();

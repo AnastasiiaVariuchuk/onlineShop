@@ -10,8 +10,6 @@ public interface IPaymentsDAO {
 
     List<Payments> getAll();
 
-    void add(int id, int idCustomer, Timestamp paymentDateTime, boolean paymentStatus);
-
     void add(Payments payments);
 
     void update(Payments payments);

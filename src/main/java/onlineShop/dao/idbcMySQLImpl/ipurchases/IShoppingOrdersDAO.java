@@ -12,8 +12,6 @@ public interface IShoppingOrdersDAO {
 
     List<ShoppingOrders> getAll();
 
-    void add(int id, Date shoppingOrderDate, double shoppingOrderTotalPrice, int idUser);
-
     void add(ShoppingOrders shoppingOrders);
 
     void update(ShoppingOrders shoppingOrders);

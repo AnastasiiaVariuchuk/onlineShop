@@ -67,28 +67,6 @@ public class DeliveriesDAO implements IDeliveriesDAO {
     }
 
     @Override
-    public void add(int id, int idAddress, int idUser, LocalDateTime deliveryDataTime, int idEmployee) {
-        PreparedStatement preparedStatement = null;
-        Connection connection = ConnectionUtil.getConnection();
-        try {
-            preparedStatement = connection.prepareStatement("INSERT INTO manufacturers VALUE(default, ?, ?, ?, ?)");
-            preparedStatement.setInt(1, idAddress);
-            preparedStatement.setInt(2, idUser);
-            preparedStatement.setTimestamp(3, Timestamp.valueOf(deliveryDataTime));
-            preparedStatement.setInt(4, idEmployee);
-            if (preparedStatement.executeUpdate() == 1) {
-                logger.info("Insertion is successful.");
-            } else
-                logger.info("Insertion was failed.");
-        } catch (SQLException e) {
-            e.getMessage();
-        } finally {
-            ConnectionUtil.close(preparedStatement);
-            ConnectionUtil.close(connection);
-        }
-    }
-
-    @Override
     public void add(Deliveries deliveries) {
         PreparedStatement preparedStatement = null;
         Connection connection = ConnectionUtil.getConnection();

@@ -10,8 +10,6 @@ public interface IManufacturersDAO {
 
     List<Manufacturers> getAll();
 
-    void add(int id, String manufacturerName, String manufacturerContact);
-
     void add(Manufacturers manufacturers);
 
     void update(Manufacturers manufacturers);

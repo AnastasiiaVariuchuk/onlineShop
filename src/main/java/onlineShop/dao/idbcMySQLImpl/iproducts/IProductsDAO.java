@@ -10,9 +10,6 @@ public interface IProductsDAO {
 
     List<Products> getAll();
 
-    void add(int id, String productName, String productDescription, int idProductCategory,
-             float productPrice, int idManufacturer, int idDiscount);
-
     void add(Products products);
 
     void update(Products products);

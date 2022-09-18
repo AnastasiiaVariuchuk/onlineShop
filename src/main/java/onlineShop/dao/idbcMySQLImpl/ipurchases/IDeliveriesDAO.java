@@ -10,8 +10,6 @@ public interface IDeliveriesDAO {
 
     List<Deliveries> getAll();
 
-    void add(int id, int idAddress, int idUser, LocalDateTime deliveryDataTime, int idEmployee);
-
     void add(Deliveries deliveries);
 
     void update(Deliveries deliveries);

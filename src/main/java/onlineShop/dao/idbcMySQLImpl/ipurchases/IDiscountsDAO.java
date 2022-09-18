@@ -9,7 +9,6 @@ public interface IDiscountsDAO {
 
     List<Discounts> getAll();
 
-    void add(int id, double discountSize);
     void add(Discounts discounts);
 
     void update(Discounts discounts);
