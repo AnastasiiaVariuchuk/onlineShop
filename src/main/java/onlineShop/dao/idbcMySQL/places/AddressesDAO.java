@@ -67,27 +67,6 @@ public class AddressesDAO implements IAddressesDAO {
     }
 
     @Override
-    public void add(int id, String addressName, String addressPostalCode, int idCity) {
-        PreparedStatement preparedStatement = null;
-        Connection connection = ConnectionUtil.getConnection();
-        try {
-            preparedStatement = connection.prepareStatement("INSERT INTO addresses VALUE(default, ?, ?, ?)");
-            preparedStatement.setString(1, addressName);
-            preparedStatement.setString(2, addressPostalCode);
-            preparedStatement.setInt(3, idCity);
-            if (preparedStatement.executeUpdate() == 1) {
-                logger.info("Insertion is successful.");
-            } else
-                logger.info("Insertion was failed.");
-        } catch (SQLException e) {
-            e.getMessage();
-        } finally {
-            ConnectionUtil.close(preparedStatement);
-            ConnectionUtil.close(connection);
-        }
-    }
-
-    @Override
     public void add(Addresses addresses) {
         PreparedStatement preparedStatement = null;
         Connection connection = ConnectionUtil.getConnection();

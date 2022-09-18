@@ -68,28 +68,6 @@ public class EmployeesDAO implements IEmployeesDAO {
     }
 
     @Override
-    public void add(int id, String employeeName, String employeeSurname, String employeeContact, double employeeSalary) {
-        PreparedStatement preparedStatement = null;
-        Connection connection = ConnectionUtil.getConnection();
-        try {
-            preparedStatement = connection.prepareStatement("INSERT INTO employees VALUE(default, ?, ?, ?, ?, ?)");
-            preparedStatement.setString(1, employeeName);
-            preparedStatement.setString(2, employeeSurname);
-            preparedStatement.setString(3, employeeContact);
-            preparedStatement.setDouble(4, employeeSalary);
-            if (preparedStatement.executeUpdate() == 1) {
-                logger.info("Insertion is successful.");
-            } else
-                logger.info("Insertion was failed.");
-        } catch (SQLException e) {
-            e.getMessage();
-        } finally {
-            ConnectionUtil.close(preparedStatement);
-            ConnectionUtil.close(connection);
-        }
-    }
-
-    @Override
     public void add(Employees employees) {
         PreparedStatement preparedStatement = null;
         Connection connection = ConnectionUtil.getConnection();

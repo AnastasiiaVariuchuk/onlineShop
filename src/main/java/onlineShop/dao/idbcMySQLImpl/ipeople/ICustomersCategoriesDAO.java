@@ -10,7 +10,6 @@ public interface ICustomersCategoriesDAO {
 
     List<CustomersCategories> getAll();
 
-    void add(int id, String customersCategoryType, boolean customersCategoryDiscount);
     void add(CustomersCategories customersCategories);
 
     void update(CustomersCategories customersCategories);

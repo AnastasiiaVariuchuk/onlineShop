@@ -10,8 +10,6 @@ public interface ICountriesDAO {
 
     List<Countries> getAll();
 
-    void add(int id, String countryName);
-
     void add(Countries countries);
 
     void update(Countries countries);

@@ -10,8 +10,6 @@ public interface ICitiesDAO {
 
     List<Cities> getAll();
 
-    void add(int id, String cityName, String cityPostalCode, int idCountry);
-
     void add(Cities cities);
 
     void update(Cities cities);

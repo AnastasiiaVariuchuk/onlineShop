@@ -67,28 +67,6 @@ public class UsersDAO implements IUsersDAO {
     }
 
     @Override
-    public void add(int id, String userName, String userEmail, String userPassword, int idCustomer) {
-        PreparedStatement preparedStatement = null;
-        Connection connection = ConnectionUtil.getConnection();
-        try {
-            preparedStatement = connection.prepareStatement("INSERT INTO users VALUE(default, ?, ?, ?, ?)");
-            preparedStatement.setString(1, userName);
-            preparedStatement.setString(2, userEmail);
-            preparedStatement.setString(3, userPassword);
-            preparedStatement.setDouble(4, idCustomer);
-            if (preparedStatement.executeUpdate() == 1) {
-                logger.info("Insertion is successful.");
-            } else
-                logger.info("Insertion was failed.");
-        } catch (SQLException e) {
-            e.getMessage();
-        } finally {
-            ConnectionUtil.close(preparedStatement);
-            ConnectionUtil.close(connection);
-        }
-    }
-
-    @Override
     public void add(Users users) {
         PreparedStatement preparedStatement = null;
         Connection connection = ConnectionUtil.getConnection();

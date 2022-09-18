@@ -68,29 +68,6 @@ public class CustomersDAO implements ICustomersDAO {
     }
 
     @Override
-    public void add(int id, String customerName, String customerSurname, String customerCard, String customerPhoneNumber, int idCustomerCategory) {
-        PreparedStatement preparedStatement = null;
-        Connection connection = ConnectionUtil.getConnection();
-        try {
-            preparedStatement = connection.prepareStatement("INSERT INTO customers VALUE(default, ?, ?, ?, ?, ?)");
-            preparedStatement.setString(1, customerName);
-            preparedStatement.setString(2, customerSurname);
-            preparedStatement.setString(3, customerCard);
-            preparedStatement.setString(4, customerPhoneNumber);
-            preparedStatement.setInt(5, idCustomerCategory);
-            if (preparedStatement.executeUpdate() == 1) {
-                logger.info("Insertion is successful.");
-            } else
-                logger.info("Insertion was failed.");
-        } catch (SQLException e) {
-            e.getMessage();
-        } finally {
-            ConnectionUtil.close(preparedStatement);
-            ConnectionUtil.close(connection);
-        }
-    }
-
-    @Override
     public void add(Customers customers) {
         PreparedStatement preparedStatement = null;
         Connection connection = ConnectionUtil.getConnection();

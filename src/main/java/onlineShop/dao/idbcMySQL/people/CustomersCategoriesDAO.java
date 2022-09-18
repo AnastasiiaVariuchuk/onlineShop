@@ -65,26 +65,6 @@ public class CustomersCategoriesDAO implements ICustomersCategoriesDAO {
     }
 
     @Override
-    public void add(int id, String customersCategoryType, boolean customersCategoryDiscount) {
-        PreparedStatement preparedStatement = null;
-        Connection connection = ConnectionUtil.getConnection();
-        try {
-            preparedStatement = connection.prepareStatement("INSERT INTO customersCategories VALUE(default, ?, ?)");
-            preparedStatement.setString(1, customersCategoryType);
-            preparedStatement.setBoolean(2, customersCategoryDiscount);
-            if (preparedStatement.executeUpdate() == 1) {
-                logger.info("Insertion is successful.");
-            } else
-                logger.info("Insertion was failed.");
-        } catch (SQLException e) {
-            e.getMessage();
-        } finally {
-            ConnectionUtil.close(preparedStatement);
-            ConnectionUtil.close(connection);
-        }
-    }
-
-    @Override
     public void add(CustomersCategories customersCategories) {
         PreparedStatement preparedStatement = null;
         Connection connection = ConnectionUtil.getConnection();

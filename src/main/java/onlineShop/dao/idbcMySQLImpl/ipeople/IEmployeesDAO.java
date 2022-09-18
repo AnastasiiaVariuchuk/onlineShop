@@ -10,8 +10,6 @@ public interface IEmployeesDAO {
 
     List<Employees> getAll();
 
-    void add(int id, String employeeName, String employeeSurname, String employeeContact, double employeeSalary);
-
     void add(Employees employees);
 
     void update(Employees employees);
