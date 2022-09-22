@@ -1,0 +1,13 @@
+{
+  "posts" : [ {
+    "id" : 100,
+    "title" : "Makeup Post",
+    "description" : "About new production in our shop!",
+    "content" : "Sale -30%"
+  }, {
+    "id" : 101,
+    "title" : "Apple Post",
+    "description" : "New IPhones in our shop!",
+    "content" : "IPhone 14"
+  } ]
+}
