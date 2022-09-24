@@ -1,4 +1,4 @@
-package taskJAKSON;
+package onlineShop.taskJAKSON;
 
 public class Post {
     private int id;

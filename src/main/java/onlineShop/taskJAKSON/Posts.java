@@ -1,13 +1,8 @@
-package taskJAKSON;
+package onlineShop.taskJAKSON;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import onlineShop.taskJAXB.EmployeeJAXB;
-import onlineShop.taskJAXB.EmployeesJAXB;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import java.io.IOException;
-import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 

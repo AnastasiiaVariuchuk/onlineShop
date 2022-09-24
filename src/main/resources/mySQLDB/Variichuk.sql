@@ -79,9 +79,9 @@ VALUES (1, 'Anna', 'Ivanova', '5678908767895432', '+380997896578', 1);
 INSERT customers(idcustomer,  customerName, customerSurname,  customerCard, customerPhoneNumber, customerCategory)
 VALUES(2, 'Ivanna', 'Kovalenco', '5678908767895433', '+380997896578', 2);
 
-INSERT users( iduser,  username, email,  password, idcustomer)
+INSERT users(iduser, username, email, password, idcustomer)
 VALUES(1, 'aNnA', 'annaivanova@gmail.com', '1234567890', 1);
-INSERT users( iduser,  username, email,  password, idcustomer)
+INSERT users(iduser, username, email, password, idcustomer)
 VALUES(2, 'iVV', 'ivv@gmail.com', '1234567891', 2);
 
 INSERT shoppingOrders(idshoppingOrder, shoppingOrderDate, shoppingOrderTotalPrice, iduser)
