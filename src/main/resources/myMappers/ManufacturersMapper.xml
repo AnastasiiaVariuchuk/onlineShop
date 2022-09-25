@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="src.main.resources.myMappers.Manufacturers">
-    <resultMap id="users" type="onlineShop.models.products.Manufacturers">
+<mapper namespace="src.main.resources.myMappers.ManufacturersMapper">
+    <resultMap id="manufacturers" type="onlineShop.models.products.Manufacturers">
         <id property="idManufacturer" column="idmanufacturer"/>
         <result property="manufacturerName" column="manufacturerName"/>
         <result property="manufacturerContact" column="manufacturerContact"/>
@@ -11,7 +11,7 @@
             resultMap="manufacturers">
         select * from manufacturers where idmanufacturer=#{idmanufacturer}
     </select>
-    <select id="getAll" resultMap="users">
+    <select id="getAll" resultMap="manufacturers">
         select * from manufacturers
     </select>
     <insert id="add">
@@ -21,6 +21,7 @@
     <update id="update">
         update users set idmanufacturer=#{idmanufacturer}, manufacturerName=#{manufacturerName},
         manufacturerContact=#{manufacturerContact}
+        where idmanufacturer=#{idmanufacturer}
     </update>
     <delete id="delete">
         delete from manufacturers where idmanufacturer=#{idmanufacturer}
