@@ -14,9 +14,7 @@ public class Main {
     private final static Logger logger = LogManager.getLogger(Main.class);
     private static ICountriesDAO CountryDAO;
     public static void main(String[] args) throws InterruptedException {
-        // create a new connection from MySQLJDBCUtil
         try (Connection connection = ConnectionUtil.getConnection()) {
-            // print out a message
             logger.info(String.format("Connected to database %s"
                     + " successfully.", connection.getCatalog()));
         } catch (SQLException ex) {

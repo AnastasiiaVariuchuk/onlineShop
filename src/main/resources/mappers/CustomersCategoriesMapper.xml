@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="src.main.resources.myMappers.CustomersCategoriesMapper">
+<mapper namespace="src.main.resources.mappers.CustomersCategoriesMapper">
     <resultMap id="customersCategories" type="onlineShop.models.people.CustomersCategories">
         <id property="idcustomersCategory" column="idCustomersCategory"/>
         <result property="customersCategoryType" column="customersCategoryType"/>

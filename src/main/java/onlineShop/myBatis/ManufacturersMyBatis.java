@@ -2,7 +2,6 @@ package onlineShop.myBatis;
 
 
 import onlineShop.dao.idbcMySQLImpl.iproducts.IManufacturersDAO;
-import onlineShop.models.people.Users;
 import onlineShop.models.products.Manufacturers;
 import org.apache.ibatis.session.SqlSession;
 
@@ -13,7 +12,7 @@ public class ManufacturersMyBatis implements IManufacturersDAO {
     @Override
     public Manufacturers getById(int id) {
         SqlSession sqlSession = MyBatisConnection.getSqlSessionFactory().openSession();
-        Manufacturers manufacturers = sqlSession.selectOne("src.main.resources.myMappers.ManufacturersMapper.getBuId", id);
+        Manufacturers manufacturers = sqlSession.selectOne("src.main.resources.mappers.ManufacturersMapper.getBuId", id);
         sqlSession.close();
         return manufacturers;
     }
@@ -22,7 +21,7 @@ public class ManufacturersMyBatis implements IManufacturersDAO {
     public List<Manufacturers> getAll() {
         List<Manufacturers> manufacturers= new LinkedList<>();
         SqlSession sqlSession = MyBatisConnection.getSqlSessionFactory().openSession();
-        manufacturers = sqlSession.selectList("src.main.resources.myMappers.manufacturersMapper.getAll");
+        manufacturers = sqlSession.selectList("src.main.resources.mappers.ManufacturersMapper.getAll");
         sqlSession.close();
         return manufacturers;
     }
@@ -30,21 +29,21 @@ public class ManufacturersMyBatis implements IManufacturersDAO {
     @Override
     public void add(Manufacturers manufacturers) {
         SqlSession sqlSession = MyBatisConnection.getSqlSessionFactory().openSession();
-        sqlSession.insert("src.main.resources.myMappers.UsersMapper.add", manufacturers);
+        sqlSession.insert("src.main.resources.mappers.ManufacturersMapper.add", manufacturers);
         sqlSession.commit();sqlSession.close();
     }
 
     @Override
     public void update(Manufacturers manufacturers) {
         SqlSession sqlSession = MyBatisConnection.getSqlSessionFactory().openSession();
-        sqlSession.update("src.main.resources.myMappers.ManufacturersMapper.update", manufacturers.getIdManufacturer());
+        sqlSession.update("src.main.resources.mappers.ManufacturersMapper.update", manufacturers.getIdManufacturer());
         sqlSession.commit();sqlSession.close();
     }
 
     @Override
     public void delete(int id) {
         SqlSession sqlSession = MyBatisConnection.getSqlSessionFactory().openSession();
-        sqlSession.delete("src.main.resources.myMappers.ManufacturersMapper.delete", id);
+        sqlSession.delete("src.main.resources.mappers.ManufacturersMapper.delete", id);
         sqlSession.commit();sqlSession.close();
     }
 }

@@ -11,14 +11,14 @@ public class MyBatisConnection {
     private static SqlSessionFactory sqlSessionFactory;
 
     static {
-        String myBatis = " mybatis-config.xml";
+        String myBatis = "mybatis-config.xml";
         InputStream inputStream;
         try {
             inputStream = Resources.getResourceAsStream(myBatis);
+            sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
     }
 
     public static SqlSessionFactory getSqlSessionFactory() {

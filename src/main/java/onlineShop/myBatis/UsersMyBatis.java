@@ -14,7 +14,7 @@ public class UsersMyBatis implements IUsersDAO {
     @Override
     public Users getById(int id) {
         SqlSession sqlSession = MyBatisConnection.getSqlSessionFactory().openSession();
-        Users users = sqlSession.selectOne("src.main.resources.myMappers.UsersMapper.getBuId", id);
+        Users users = sqlSession.selectOne("src.main.resources.mappers.UsersMapper.getBuId", id);
         sqlSession.close();
         return users;
     }
@@ -23,7 +23,7 @@ public class UsersMyBatis implements IUsersDAO {
     public List<Users> getAll() {
         List<Users> users = new LinkedList<>();
         SqlSession sqlSession = MyBatisConnection.getSqlSessionFactory().openSession();
-        users = sqlSession.selectList("src.main.resources.myMappers.UsersMapper.getAll");
+        users = sqlSession.selectList("src.main.resources.mappers.UsersMapper.getAll");
         sqlSession.close();
         return users;
     }
@@ -31,21 +31,21 @@ public class UsersMyBatis implements IUsersDAO {
     @Override
     public void add(Users users) {
         SqlSession sqlSession = MyBatisConnection.getSqlSessionFactory().openSession();
-        sqlSession.insert("src.main.resources.myMappers.UsersMapper.add", users);
+        sqlSession.insert("src.main.resources.mappers.UsersMapper.add", users);
         sqlSession.commit();sqlSession.close();
     }
 
     @Override
     public void update(Users users) {
         SqlSession sqlSession = MyBatisConnection.getSqlSessionFactory().openSession();
-        sqlSession.update("src.main.resources.myMappers.UsersMapper.update", users.getIdUser());
+        sqlSession.update("src.main.resources.mappers.UsersMapper.update", users.getIdUser());
         sqlSession.commit();sqlSession.close();
     }
 
     @Override
     public void delete(int id) {
         SqlSession sqlSession = MyBatisConnection.getSqlSessionFactory().openSession();
-        sqlSession.delete("src.main.resources.myMappers.UsersMapper.delete", id);
+        sqlSession.delete("src.main.resources.mappers.UsersMapper.delete", id);
         sqlSession.commit();sqlSession.close();
     }
 }

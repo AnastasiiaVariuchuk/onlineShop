@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="src.main.resources.myMappers.ManufacturersMapper">
-    <resultMap id="manufacturers" type="onlineShop.models.people.Manufacturers">
+<mapper namespace="src.main.resources.mappers.ManufacturersMapper">
+    <resultMap id="manufacturers" type="onlineShop.models.products.Manufacturers">
         <id property="idManufacturer" column="idmanufacturer"/>
         <result property="manufacturerName" column="manufacturerName"/>
         <result property="manufacturerContact" column="manufacturerContact"/>
