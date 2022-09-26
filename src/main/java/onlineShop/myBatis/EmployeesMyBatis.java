@@ -11,7 +11,7 @@ public class EmployeesMyBatis implements IEmployeesDAO {
     @Override
     public Employees getById(int id) {
         SqlSession sqlSession = MyBatisConnection.getSqlSessionFactory().openSession();
-        Employees employees = sqlSession.selectOne("src.main.resources.mappers.EmployeesMapper.getBuId", id);
+        Employees employees = sqlSession.selectOne("src.main.resources.mappers.EmployeesMapper.getById", id);
         sqlSession.close();
         return employees;
     }
@@ -35,7 +35,7 @@ public class EmployeesMyBatis implements IEmployeesDAO {
     @Override
     public void update(Employees employees) {
         SqlSession sqlSession = MyBatisConnection.getSqlSessionFactory().openSession();
-        sqlSession.update("src.main.resources.mappers.EmployeesMapper.update", employees.getIdEmployee());
+        sqlSession.update("src.main.resources.mappers.EmployeesMapper.update", employees);
         sqlSession.commit();sqlSession.close();
     }
 

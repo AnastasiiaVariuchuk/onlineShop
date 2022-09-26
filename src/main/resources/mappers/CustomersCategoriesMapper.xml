@@ -3,7 +3,7 @@
 
 <mapper namespace="src.main.resources.mappers.CustomersCategoriesMapper">
     <resultMap id="customersCategories" type="onlineShop.models.people.CustomersCategories">
-        <id property="idcustomersCategory" column="idCustomersCategory"/>
+        <id property="idCustomersCategory" column="idcustomersCategory"/>
         <result property="customersCategoryType" column="customersCategoryType"/>
         <result property=" customersCategoryDiscount" column=" customersCategoryDiscount"/>
     </resultMap>

@@ -12,7 +12,7 @@ public class CustomersMyBatis implements ICustomersDAO {
     @Override
     public Customers getById(int id) {
         SqlSession sqlSession = MyBatisConnection.getSqlSessionFactory().openSession();
-        Customers customers = sqlSession.selectOne("src.main.resources.mappers.CustomersMapper.getBuId", id);
+        Customers customers = sqlSession.selectOne("src.main.resources.mappers.CustomersMapper.getById", id);
         sqlSession.close();
         return customers;
     }
@@ -36,7 +36,7 @@ public class CustomersMyBatis implements ICustomersDAO {
     @Override
     public void update(Customers customers) {
         SqlSession sqlSession = MyBatisConnection.getSqlSessionFactory().openSession();
-        sqlSession.update("src.main.resources.mappers.CustomersMapper.update", customers.getIdCustomer());
+        sqlSession.update("src.main.resources.mappers.CustomersMapper.update", customers);
         sqlSession.commit();sqlSession.close();
     }
 

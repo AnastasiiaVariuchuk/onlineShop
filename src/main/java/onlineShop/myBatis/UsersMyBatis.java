@@ -14,7 +14,7 @@ public class UsersMyBatis implements IUsersDAO {
     @Override
     public Users getById(int id) {
         SqlSession sqlSession = MyBatisConnection.getSqlSessionFactory().openSession();
-        Users users = sqlSession.selectOne("src.main.resources.mappers.UsersMapper.getBuId", id);
+        Users users = sqlSession.selectOne("src.main.resources.mappers.UsersMapper.getById", id);
         sqlSession.close();
         return users;
     }
@@ -38,7 +38,7 @@ public class UsersMyBatis implements IUsersDAO {
     @Override
     public void update(Users users) {
         SqlSession sqlSession = MyBatisConnection.getSqlSessionFactory().openSession();
-        sqlSession.update("src.main.resources.mappers.UsersMapper.update", users.getIdUser());
+        sqlSession.update("src.main.resources.mappers.UsersMapper.update", users);
         sqlSession.commit();sqlSession.close();
     }
 

@@ -7,7 +7,7 @@
         <result property="manufacturerName" column="manufacturerName"/>
         <result property="manufacturerContact" column="manufacturerContact"/>
     </resultMap>
-    <select id="getById" parameterType="java.lang.Integer"
+    <select id="getById" parameterType="java.lang.Integer">
             resultMap="manufacturers">
         select * from manufacturers where idmanufacturer=#{idmanufacturer}
     </select>

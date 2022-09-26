@@ -12,7 +12,7 @@ public class ManufacturersMyBatis implements IManufacturersDAO {
     @Override
     public Manufacturers getById(int id) {
         SqlSession sqlSession = MyBatisConnection.getSqlSessionFactory().openSession();
-        Manufacturers manufacturers = sqlSession.selectOne("src.main.resources.mappers.ManufacturersMapper.getBuId", id);
+        Manufacturers manufacturers = sqlSession.selectOne("src.main.resources.mappers.ManufacturersMapper.getById", id);
         sqlSession.close();
         return manufacturers;
     }
@@ -36,7 +36,7 @@ public class ManufacturersMyBatis implements IManufacturersDAO {
     @Override
     public void update(Manufacturers manufacturers) {
         SqlSession sqlSession = MyBatisConnection.getSqlSessionFactory().openSession();
-        sqlSession.update("src.main.resources.mappers.ManufacturersMapper.update", manufacturers.getIdManufacturer());
+        sqlSession.update("src.main.resources.mappers.ManufacturersMapper.update", manufacturers);
         sqlSession.commit();sqlSession.close();
     }
 

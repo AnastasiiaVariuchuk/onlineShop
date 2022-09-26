@@ -1,7 +1,10 @@
 package onlineShop;
 
+import onlineShop.dao.idbcMySQL.people.CustomersDAO;
 import onlineShop.dao.idbcMySQL.places.CountriesDAO;
+import onlineShop.dao.idbcMySQLImpl.ipeople.ICustomersDAO;
 import onlineShop.dao.idbcMySQLImpl.iplaces.ICountriesDAO;
+import onlineShop.models.people.Customers;
 import onlineShop.models.places.Countries;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -13,6 +16,7 @@ import java.util.List;
 public class Main {
     private final static Logger logger = LogManager.getLogger(Main.class);
     private static ICountriesDAO CountryDAO;
+    private static ICustomersDAO CustomersDAO;
     public static void main(String[] args) throws InterruptedException {
         try (Connection connection = ConnectionUtil.getConnection()) {
             logger.info(String.format("Connected to database %s"
@@ -22,21 +26,12 @@ public class Main {
         }
 
 
-        CountryDAO = new CountriesDAO();
+        //CountryDAO = new CountriesDAO();
 
-        List<Countries> countries = CountryDAO.getAll();
-        logger.info(countries);
-
-        //CountryDAO.add(new Countries("Ukraine"));
-
-        CountryDAO.getById(8);
-
-        //CountryDAO.update(new Countries(7, "Japan"));
-
-        //CountryDAO.getById(3);
-
-        //CountryDAO.delete(5);
-
-        logger.info(countries);
+        //List<Countries> countries = CountryDAO.getAll();
+        //logger.info(countries);
+        CustomersDAO = new CustomersDAO();
+        List<Customers> customers = CustomersDAO.getAll();
+        logger.info(customers);
     }
 }

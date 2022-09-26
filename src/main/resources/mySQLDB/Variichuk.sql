@@ -76,7 +76,7 @@ VALUES (2, 'Regular customer', true);
 
 INSERT customers(idcustomer, customerName, customerSurname, customerCard, customerPhoneNumber, idCustomerCategory)
 VALUES (1, 'Anna', 'Ivanova', '5678908767895432', '+380997896578', 1);
-INSERT customers(idcustomer,  customerName, customerSurname,  customerCard, customerPhoneNumber, customerCategory)
+INSERT customers(idcustomer,  customerName, customerSurname,  customerCard, customerPhoneNumber, idCustomerCategory)
 VALUES(2, 'Ivanna', 'Kovalenco', '5678908767895433', '+380997896578', 2);
 
 INSERT users(iduser, username, email, password, idcustomer)
