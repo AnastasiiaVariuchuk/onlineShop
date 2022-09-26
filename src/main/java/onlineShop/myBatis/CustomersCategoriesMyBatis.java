@@ -11,7 +11,10 @@ import java.util.List;
 public class CustomersCategoriesMyBatis implements ICustomersCategoriesDAO {
     @Override
     public CustomersCategories getById(int id) {
-        return null;
+        SqlSession sqlSession = MyBatisConnection.getSqlSessionFactory().openSession();
+        CustomersCategories customersCategories = sqlSession.selectOne("src.main.resources.mappers.CcustomersCategories.getById", id);
+        sqlSession.close();
+        return customersCategories;
     }
 
     @Override
@@ -25,16 +28,22 @@ public class CustomersCategoriesMyBatis implements ICustomersCategoriesDAO {
 
     @Override
     public void add(CustomersCategories customersCategories) {
-
+        SqlSession sqlSession = MyBatisConnection.getSqlSessionFactory().openSession();
+        sqlSession.insert("src.main.resources.mappers.CustomersCategoriesMapper.add", customersCategories);
+        sqlSession.commit();sqlSession.close();
     }
 
     @Override
     public void update(CustomersCategories customersCategories) {
-
+        SqlSession sqlSession = MyBatisConnection.getSqlSessionFactory().openSession();
+        sqlSession.update("src.main.resources.mappers.CustomersCategories.update", customersCategories);
+        sqlSession.commit();sqlSession.close();
     }
 
     @Override
     public void delete(int id) {
-
+        SqlSession sqlSession = MyBatisConnection.getSqlSessionFactory().openSession();
+        sqlSession.delete("src.main.resources.mappers.CustomersCategories.delete", id);
+        sqlSession.commit();sqlSession.close();
     }
 }

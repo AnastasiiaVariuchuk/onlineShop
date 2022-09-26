@@ -11,21 +11,21 @@
     </resultMap>
     <select id="getById" parameterType="int"
             resultMap="customers">
-        select * from customers where idcustomer=#{idcustomer}
+        SELECT * FROM customers WHERE idcustomer=#{idcustomer}
     </select>
     <select id="getAll" resultMap="customers">
-        select * from customers
+        SELECT * FROM customers
     </select>
     <insert id="add">
-        insert into customers(idcustomer, customerName, customerSurname, customerCard, customerPhoneNumber, idCustomerCategory)
-        values (#{idcustomer}, #{customerName}, #{customerSurname}, #{customerCard}, #{customerPhoneNumber}, #{idCustomerCategory})
+        INSERT INTO customers(idcustomer, customerName, customerSurname, customerCard, customerPhoneNumber, idCustomerCategory)
+        VALUES (#{idcustomer}, #{customerName}, #{customerSurname}, #{customerCard}, #{customerPhoneNumber}, #{idCustomerCategory})
     </insert>
     <update id="update">
-        update users set idcustomer=#{idcustomer}, customerName=#{customerName}, customerSurname=#{customerSurname},
+        UPDATE users SET idcustomer=#{idcustomer}, customerName=#{customerName}, customerSurname=#{customerSurname},
         customerCard=#{customerCard}, customerPhoneNumber=#{customerPhoneNumber}, idCustomerCategory=#{idCustomerCategory}
-        where idcustomer=#{idcustomer}
+        WHERE idcustomer=#{idcustomer}
     </update>
     <delete id="delete">
-        delete from customers where idcustomer=#{idcustomer}
+        DELETE customers WHERE idcustomer=#{idcustomer}
     </delete>
 </mapper>

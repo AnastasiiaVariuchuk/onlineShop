@@ -9,21 +9,21 @@
     </resultMap>
     <select id="getById" parameterType="java.lang.Integer"
             resultMap="customersCategories">
-        select * from customersCategories where idcustomersCategory=#{idcustomersCategory}
+        SELECT * FROM customersCategories WHERE idcustomersCategory=#{idcustomersCategory}
     </select>
     <select id="getAll" resultMap="customersCategories">
-        select * from customersCategories
+        SELECT * FROM customersCategories
     </select>
     <insert id="add">
-        insert into customersCategories(idcustomersCategory, idcustomersCategoryType, idcustomersCategoryDiscount)
-        values (#{idcustomersCategory}, #{idcustomersCategoryType}, #{idcustomersCategoryDiscount})
+        INSERT INTO customersCategories(idcustomersCategory, idcustomersCategoryType, idcustomersCategoryDiscount)
+        VALUES (#{idcustomersCategory}, #{idcustomersCategoryType}, #{idcustomersCategoryDiscount})
     </insert>
     <update id="update">
-        update users set idcustomersCategory=#{idcustomersCategory}, idcustomersCategoryType=#{idcustomersCategoryType},
+        UPDATE customersCategories SET idcustomersCategory=#{idcustomersCategory}, idcustomersCategoryType=#{idcustomersCategoryType},
         idcustomersCategoryDiscount=#{idcustomersCategoryDiscount}
-        where idcustomersCategory=#{idcustomersCategory}
+        WHERE idcustomersCategory=#{idcustomersCategory}
     </update>
     <delete id="delete">
-        delete from customersCategories where idcustomersCategory=#{idcustomersCategory}
+        DELETE FROM customersCategories WHERE idcustomersCategory=#{idcustomersCategory}
     </delete>
 </mapper>

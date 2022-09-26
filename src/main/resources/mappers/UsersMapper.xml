@@ -11,20 +11,20 @@
     </resultMap>
     <select id="getById" parameterType="java.lang.Integer"
             resultMap="users">
-        select * from users where iduser=#{iduser}
+        SELECT * FROM users WHERE iduser=#{iduser}
     </select>
     <select id="getAll" resultMap="users">
-        select * from users
+        SELECT * FROM users
     </select>
     <insert id="add">
-        insert into users(iduser, username, email, password, idcustomer)
-        values (#{iduser}, #{username}, #{email}, #{password}, #{idcustomer})
+        INSERT INTO users(iduser, username, email, password, idcustomer)
+        VALUES (#{iduser}, #{username}, #{email}, #{password}, #{idcustomer})
     </insert>
     <update id="update">
-        update users set username=#{username}, email=#{email}, password=#{password}
-        where iduser=#{iduser}
+        UPDATE users SET username=#{username}, email=#{email}, password=#{password}
+        WHERE iduser=#{iduser}
     </update>
     <delete id="delete">
-        delete from users where iduser=#{iduser}
+        DELETE FROM users WHERE iduser=#{iduser}
     </delete>
 </mapper>

@@ -7,23 +7,23 @@
         <result property="manufacturerName" column="manufacturerName"/>
         <result property="manufacturerContact" column="manufacturerContact"/>
     </resultMap>
-    <select id="getById" parameterType="java.lang.Integer">
+    <select id="getById" parameterType="java.lang.Integer"
             resultMap="manufacturers">
-        select * from manufacturers where idmanufacturer=#{idmanufacturer}
+        SELECT * FROM manufacturers WHERE idmanufacturer=#{idmanufacturer}
     </select>
     <select id="getAll" resultMap="manufacturers">
-        select * from manufacturers
+        SELECT * FROM manufacturers
     </select>
     <insert id="add">
-        insert into manufacturers(idmanufacturer, manufacturerName, manufacturerContact)
-        values (#{idmanufacturer}, #{manufacturerName}, #{manufacturerContact})
+        INSERT INTO manufacturers(idmanufacturer, manufacturerName, manufacturerContact)
+        VALUES (#{idmanufacturer}, #{manufacturerName}, #{manufacturerContact})
     </insert>
     <update id="update">
-        update users set idmanufacturer=#{idmanufacturer}, manufacturerName=#{manufacturerName},
+        UPDATE manufacturers SET idmanufacturer=#{idmanufacturer}, manufacturerName=#{manufacturerName},
         manufacturerContact=#{manufacturerContact}
-        where idmanufacturer=#{idmanufacturer}
+        WHERE idmanufacturer=#{idmanufacturer}
     </update>
     <delete id="delete">
-        delete from manufacturers where idmanufacturer=#{idmanufacturer}
+        DELETE FROM manufacturers WHERE idmanufacturer=#{idmanufacturer}
     </delete>
 </mapper>

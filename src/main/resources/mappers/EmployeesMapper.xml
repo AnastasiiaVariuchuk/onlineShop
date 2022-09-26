@@ -11,21 +11,21 @@
     </resultMap>
     <select id="getById" parameterType="java.lang.Integer"
             resultMap="employees">
-        select * from employees where idemployee=#{idemployee}
+        SELECT * FROM employees WHERE idemployee=#{idemployee}
     </select>
     <select id="getAll" resultMap="employees">
-        select * from employees
+        SELECT * FROM employees
     </select>
     <insert id="add">
-        insert into customers(idemployee, employeeName, employeeSurname, employeeContact, employeeSalary)
-        values (#{idemployee}, #{employeeName}, #{employeeSurname}, #{employeeContact}, #{employeeSalary})
+        INSERT INTO employees(idemployee, employeeName, employeeSurname, employeeContact, employeeSalary)
+        VALUES (#{idemployee}, #{employeeName}, #{employeeSurname}, #{employeeContact}, #{employeeSalary})
     </insert>
     <update id="update">
-        update users set idemployee=#{idemployee}, employeeName=#{employeeName},
+        UPDATE employees SET idemployee=#{idemployee}, employeeName=#{employeeName},
         employeeSurname=#{employeeSurname}, employeeContact=#{employeeContact}, {employeeSalary=#{employeeSalary}
-        where idemployee=#{idemployee}
+        WHERE idemployee=#{idemployee}
     </update>
     <delete id="delete">
-        delete from employees where idemployee=#{idemployee}
+        DELETE FROM employees WHERE idemployee=#{idemployee}
     </delete>
 </mapper>
