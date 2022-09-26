@@ -1,4 +1,4 @@
-package onlineShop.myBatis;
+package onlineShop.dao.myBatis;
 
 import onlineShop.dao.idbcMySQLImpl.ipeople.IEmployeesDAO;
 import onlineShop.models.people.Employees;

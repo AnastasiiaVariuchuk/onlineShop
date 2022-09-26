@@ -1,8 +1,7 @@
-package onlineShop.myBatis;
+package onlineShop.dao.myBatis;
 
 import onlineShop.dao.idbcMySQLImpl.ipeople.ICustomersDAO;
 import onlineShop.models.people.Customers;
-import onlineShop.models.products.Manufacturers;
 import org.apache.ibatis.session.SqlSession;
 
 import java.util.LinkedList;

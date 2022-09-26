@@ -1,12 +1,7 @@
-package onlineShop.myBatis;
+package onlineShop.dao.myBatis;
 
-import onlineShop.models.people.Customers;
-import org.apache.ibatis.session.SqlSession;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.core.Logger;
-
-import java.util.LinkedList;
-import java.util.List;
 
 
 public class MyBatisExecutor {
@@ -17,6 +12,6 @@ public class MyBatisExecutor {
         //EmployeesMyBatis employeesMyBatis = new EmployeesMyBatis();
         //employeesMyBatis.getAll();
         CustomersCategoriesMyBatis customersCategoriesMyBatis = new CustomersCategoriesMyBatis();
-        customersCategoriesMyBatis.getAll();
+        logger.info(customersCategoriesMyBatis.getAll());
     }
 }

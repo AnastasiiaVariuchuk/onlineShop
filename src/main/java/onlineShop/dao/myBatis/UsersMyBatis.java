@@ -1,11 +1,8 @@
-package onlineShop.myBatis;
+package onlineShop.dao.myBatis;
 
-import onlineShop.dao.idbcMySQL.people.UsersDAO;
 import onlineShop.dao.idbcMySQLImpl.ipeople.IUsersDAO;
 import onlineShop.models.people.Users;
 import org.apache.ibatis.session.SqlSession;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
 import java.util.LinkedList;
 import java.util.List;
