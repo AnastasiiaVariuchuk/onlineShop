@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="src.main.resources.myMappers.CustomersCategoriesMapper">
+    <resultMap id="customersCategories" type="onlineShop.models.people.CustomersCategories">
+        <id property="idcustomersCategory" column="idCustomersCategory"/>
+        <result property="customersCategoryType" column="customersCategoryType"/>
+        <result property=" customersCategoryDiscount" column=" customersCategoryDiscount"/>
+    </resultMap>
+    <select id="getById" parameterType="java.lang.Integer"
+            resultMap="customersCategories">
+        select * from customersCategories where idcustomersCategory=#{idcustomersCategory}
+    </select>
+    <select id="getAll" resultMap="customersCategories">
+        select * from customersCategories
+    </select>
+    <insert id="add">
+        insert into customersCategories(idcustomersCategory, idcustomersCategoryType, idcustomersCategoryDiscount)
+        values (#{idcustomersCategory}, #{idcustomersCategoryType}, #{idcustomersCategoryDiscount})
+    </insert>
+    <update id="update">
+        update users set idcustomersCategory=#{idcustomersCategory}, idcustomersCategoryType=#{idcustomersCategoryType},
+        idcustomersCategoryDiscount=#{idcustomersCategoryDiscount}
+        where idcustomersCategory=#{idcustomersCategory}
+    </update>
+    <delete id="delete">
+        delete from customersCategories where idcustomersCategory=#{idcustomersCategory}
+    </delete>
+</mapper>

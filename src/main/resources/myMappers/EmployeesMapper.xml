@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="src.main.resources.myMappers.EmployeesMapper">
-    <resultMap id="employees" type="onlineShop.models.products.Employees">
+    <resultMap id="employees" type="onlineShop.models.people.Employees">
         <id property="idEmployee" column="idemployee"/>
         <result property="employeeName" column="employeeName"/>
         <result property="employeeSurname" column="employeeSurname"/>
@@ -13,11 +13,11 @@
             resultMap="employees">
         select * from employees where idemployee=#{idemployee}
     </select>
-    <select id="getAll" resultMap="users">
-        select * from memployees
+    <select id="getAll" resultMap="employees">
+        select * from employees
     </select>
     <insert id="add">
-        insert into manufacturers(idemployee, employeeName, employeeSurname, employeeContact, employeeSalary)
+        insert into customers(idemployee, employeeName, employeeSurname, employeeContact, employeeSalary)
         values (#{idemployee}, #{employeeName}, #{employeeSurname}, #{employeeContact}, #{employeeSalary})
     </insert>
     <update id="update">
