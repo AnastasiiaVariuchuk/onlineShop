@@ -13,12 +13,12 @@ import java.util.List;
 
 public class UsersDAO implements IUsersDAO {
     private static final Logger logger = LogManager.getLogger(UsersDAO.class);
-    private Users getUsersById(ResultSet resultSet) throws SQLException {
+    public Users getUsersById(ResultSet resultSet) throws SQLException {
         Users users1 = new Users();
         users1.setIdUser(resultSet.getInt("iduser"));
         users1.setUserName(resultSet.getString("userName"));
         users1.setUserEmail(resultSet.getString("email"));
-        users1.setUserPassword(resultSet.getString("employeeContact"));
+        users1.setUserPassword(resultSet.getString("password"));
         users1.setIdCustomer(resultSet.getInt("idcustomer"));
         return users1;
     }
