@@ -2,9 +2,15 @@ package onlineShop.services;
 
 import onlineShop.ConnectionUtil;
 import onlineShop.dao.idbcMySQL.people.UsersDAO;
+import onlineShop.dao.idbcMySQL.places.AddressesDAO;
+import onlineShop.dao.idbcMySQL.places.CitiesDAO;
+import onlineShop.dao.idbcMySQL.places.CountriesDAO;
 import onlineShop.dao.idbcMySQLImpl.ipeople.ICustomersDAO;
 import onlineShop.dao.idbcMySQLImpl.iplaces.ICountriesDAO;
 import onlineShop.models.people.Users;
+import onlineShop.models.places.Addresses;
+import onlineShop.models.places.Cities;
+import onlineShop.models.places.Countries;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -37,8 +43,9 @@ public class Main {
         //user.setIdCustomer(56);
         //logger.info(user);
         //logger.info(Registration.customerRegistration());
-        UsersDAO usersDAO = new UsersDAO();
+        /*UsersDAO usersDAO = new UsersDAO();
         logger.info(usersDAO.getAll());
+        logger.info(usersDAO.getById(2));
         Users users = new Users(1, "ANNA", "annaivanova@gmail.com", "1234567890", 1);
         //logger.info(Check.isUser(users));
         try {
@@ -47,7 +54,8 @@ public class Main {
             throw new RuntimeException(e);
         }
 
-        logger.info(CheckUser.isCorrectPassword(users));
-
+        logger.info(CheckUser.isCorrectPassword(users));*/
+        AddressesDAO addressesDAO = new AddressesDAO();
+        logger.info(addressesDAO.getAll());
     }
 }

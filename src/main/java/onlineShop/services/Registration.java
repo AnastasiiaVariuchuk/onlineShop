@@ -65,7 +65,7 @@ public class Registration {
         boolean surnameStatus = false;
         boolean phoneNumberStatus = false;
         boolean cardStatus = false;
-        boolean customerStatus = false;
+        //boolean customerStatus = false;
 
         logger.info("welcome to customer registration");
 

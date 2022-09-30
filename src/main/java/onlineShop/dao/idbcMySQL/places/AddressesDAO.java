@@ -71,10 +71,11 @@ public class AddressesDAO implements IAddressesDAO {
         PreparedStatement preparedStatement = null;
         Connection connection = ConnectionUtil.getConnection();
         try {
-            preparedStatement = connection.prepareStatement("INSERT INTO addresses VALUE(default, ?, ?, ?)");
-            preparedStatement.setString(1, addresses.getAddressName());
-            preparedStatement.setString(2, addresses.getAddressPostalCode());
-            preparedStatement.setInt(3, addresses.getIdCity());
+            preparedStatement = connection.prepareStatement("INSERT INTO addresses VALUES(?, ?, ?, ?)");
+            preparedStatement.setInt(1, addresses.getIdAddress());
+            preparedStatement.setString(2, addresses.getAddressName());
+            preparedStatement.setString(3, addresses.getAddressPostalCode());
+            preparedStatement.setInt(4, addresses.getIdCity());
             if (preparedStatement.executeUpdate() == 1) {
                 logger.info("Insertion is successful.");
             } else

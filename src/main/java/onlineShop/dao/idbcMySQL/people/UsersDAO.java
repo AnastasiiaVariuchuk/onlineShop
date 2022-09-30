@@ -22,6 +22,7 @@ public class UsersDAO implements IUsersDAO {
         users1.setIdCustomer(resultSet.getInt("idcustomer"));
         return users1;
     }
+
     @Override
     public Users getById(int id) {
         ResultSet resultSet = null;
@@ -43,6 +44,7 @@ public class UsersDAO implements IUsersDAO {
         }
         return null;
     }
+
 
     @Override
     public List<Users> getAll() {
