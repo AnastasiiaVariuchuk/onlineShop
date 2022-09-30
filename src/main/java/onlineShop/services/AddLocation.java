@@ -47,7 +47,7 @@ public class AddLocation {
             if (citiesDAO.getById(cityInput) != null) {
                 cityStatus = true;
             } else {
-                logger.info("Please, choose country from the list!");
+                logger.info("Please, choose city from the list!");
             }
         } while (!cityStatus);
         return citiesDAO.getById(cityInput);

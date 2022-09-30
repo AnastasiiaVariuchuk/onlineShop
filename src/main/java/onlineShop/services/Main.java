@@ -55,7 +55,8 @@ public class Main {
         }
 
         logger.info(CheckUser.isCorrectPassword(users));*/
-        AddressesDAO addressesDAO = new AddressesDAO();
-        logger.info(addressesDAO.getAll());
+        /*AddressesDAO addressesDAO = new AddressesDAO();
+        logger.info(addressesDAO.getAll());*/
+
     }
 }

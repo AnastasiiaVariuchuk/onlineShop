@@ -1,4 +1,4 @@
-package onlineShop.services;
+package onlineShop.services.identification;
 
 
 import onlineShop.models.people.Customers;

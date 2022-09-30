@@ -1,15 +1,11 @@
-package onlineShop.services;
+package onlineShop.services.identification;
 
-import onlineShop.ConnectionUtil;
 import onlineShop.dao.idbcMySQL.people.UsersDAO;
 import onlineShop.models.people.Users;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import java.sql.Connection;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 
 public class FindUser {
     private static final Logger logger = LogManager.getLogger(FindUser.class);
