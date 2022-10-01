@@ -71,7 +71,7 @@ public class DeliveriesDAO implements IDeliveriesDAO {
         PreparedStatement preparedStatement = null;
         Connection connection = ConnectionUtil.getConnection();
         try {
-            preparedStatement = connection.prepareStatement("INSERT INTO manufacturers VALUE(default, ?, ?, ?, ?)");
+            preparedStatement = connection.prepareStatement("INSERT INTO deliveries VALUE(default, ?, ?, ?, ?)");
             preparedStatement.setInt(1, deliveries.getIdAddress());
             preparedStatement.setInt(2, deliveries.getIdUser());
             preparedStatement.setTimestamp(3, deliveries.getDeliveryDataTime());

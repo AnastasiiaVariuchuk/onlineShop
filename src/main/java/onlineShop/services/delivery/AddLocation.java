@@ -53,7 +53,7 @@ public class AddLocation {
         return citiesDAO.getById(cityInput);
     }
 
-    public static void addAddress(Cities cities) {
+    public static Addresses addAddress(Cities cities) {
         Scanner scanner = new Scanner(System.in);
         Addresses addresses = new Addresses();
         AddressesDAO addressesDAO = new AddressesDAO();
@@ -69,5 +69,6 @@ public class AddLocation {
         addresses.setIdCity(cities.getIdCity());
         addresses.setIdAddress((int) (count+1));
         addressesDAO.add(addresses);
+        return addresses;
     }
 }

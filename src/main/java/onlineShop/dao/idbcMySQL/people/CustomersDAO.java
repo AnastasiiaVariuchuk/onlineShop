@@ -30,7 +30,7 @@ public class CustomersDAO implements ICustomersDAO {
         Connection connection = ConnectionUtil.getConnection();
         try {
             statement = connection.createStatement();
-            resultSet = statement.executeQuery("SELECT * FROM customers WHERE idcustomers=" + id);
+            resultSet = statement.executeQuery("SELECT * FROM customers WHERE idcustomer=" + id);
             if (resultSet.next()) {
                 logger.info(getCustomersById(resultSet));
                 return getCustomersById(resultSet);

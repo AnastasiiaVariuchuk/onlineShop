@@ -71,7 +71,7 @@ public class PaymentsDAO implements IPaymentsDAO {
         PreparedStatement preparedStatement = null;
         Connection connection = ConnectionUtil.getConnection();
         try {
-            preparedStatement = connection.prepareStatement("INSERT INTO payments VALUE(default, ?, ?, ?)");
+            preparedStatement = connection.prepareStatement("INSERT INTO payments VALUES(default, ?, ?, ?)");
             preparedStatement.setInt(1, payments.getIdCustomer());
             preparedStatement.setTimestamp(2, payments.getPaymentDateTime());
             preparedStatement.setBoolean(3, payments.isPaymentStatus());

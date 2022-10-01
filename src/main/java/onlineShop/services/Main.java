@@ -1,15 +1,25 @@
 package onlineShop.services;
 
 import onlineShop.ConnectionUtil;
+import onlineShop.dao.idbcMySQL.people.EmployeesDAO;
+import onlineShop.dao.idbcMySQL.people.UsersDAO;
+import onlineShop.dao.idbcMySQL.purchases.DeliveriesDAO;
 import onlineShop.dao.idbcMySQL.purchases.ShoppingOrdersDAO;
 
+import onlineShop.models.places.Addresses;
+import onlineShop.models.purchases.Deliveries;
+import onlineShop.services.delivery.AddLocation;
+import onlineShop.services.delivery.Delivery;
 import onlineShop.services.orderService.Calculator;
+import onlineShop.services.orderService.Payment;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.sql.Timestamp;
+import java.util.Date;
 
 public class Main {
     private final static Logger logger = LogManager.getLogger(Main.class);
@@ -50,16 +60,36 @@ public class Main {
         logger.info(addressesDAO.getAll());*/
         //logger.info(SingUp.entry());
 
-        //UsersDAO usersDAO = new UsersDAO();
-       // usersDAO.getById(2);
+        UsersDAO usersDAO = new UsersDAO();
+        //Payment.createPayment(usersDAO.getById(2));
+       // Delivery.createDelivery(usersDAO.getById(2));
+        DeliveriesDAO deliveriesDAO = new DeliveriesDAO();
+        Deliveries deliveries = new Deliveries();
+
+        deliveries.setIdAddress(1);
+
+        deliveries.setIdUser(3);
+
+        java.util.Date d1 = new Date();
+        Long l1 = d1.getTime();
+        Timestamp timestamp = new Timestamp(l1);
+        deliveries.setDeliveryDataTime(timestamp);
+
+        EmployeesDAO employeesDAO = new EmployeesDAO();
+        int max = (int) employeesDAO.getAll().stream().count();
+        int min = 1;
+        int range = max - min + 1;
+        deliveries.setIdEmployee((int)(Math.random() * range) + min);
+        logger.info(deliveries);
+        deliveriesDAO.add(deliveries);
        // ShoppingOrders shoppingOrders = Order.createOrder(usersDAO.getById(2));
 
         //ProductOrders productOrders = Order.createProductOrder(Assortment.chooseProduct(Assortment.chooseProductCategory()), shoppingOrders);
 
 
         //logger.info(shoppingOrders.getShoppingOrderTotalPrice());
-        ShoppingOrdersDAO shoppingOrdersDAO = new ShoppingOrdersDAO();
-        logger.info(Calculator.totalPrice(shoppingOrdersDAO.getById(11)));
+        //ShoppingOrdersDAO shoppingOrdersDAO = new ShoppingOrdersDAO();
+        //logger.info(Calculator.totalPrice(shoppingOrdersDAO.getById(11)));
 
     }
 }
