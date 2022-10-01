@@ -1,9 +1,7 @@
-package onlineShop.services;
+package onlineShop.services.orderService;
 
-import onlineShop.dao.idbcMySQL.places.CitiesDAO;
 import onlineShop.dao.idbcMySQL.products.ProductCategoriesDAO;
 import onlineShop.dao.idbcMySQL.products.ProductsDAO;
-import onlineShop.models.places.Cities;
 import onlineShop.models.products.ProductCategories;
 import onlineShop.models.products.Products;
 import org.apache.logging.log4j.LogManager;

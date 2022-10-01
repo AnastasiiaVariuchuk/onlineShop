@@ -1,4 +1,4 @@
-package onlineShop.services;
+package onlineShop.services.orderService;
 
 import onlineShop.dao.idbcMySQL.products.ProductsDAO;
 import onlineShop.dao.idbcMySQL.purchases.DiscountsDAO;
@@ -22,12 +22,14 @@ public class Calculator {
         List<ProductOrders> productOrders = productOrdersDAO.getAll().stream()
                 .filter(productOrders1 -> productOrders1.getIdShoppingOrder() == shoppingOrders.getIdShoppingOrder())
                 .collect(Collectors.toList());
+        productOrders.forEach(logger::info);
         double price = 0;
         for(ProductOrders productOrders1 : productOrders) {
             Products product = new Products();
             product = productsDAO.getById(productOrders1.getIdProduct());
+            logger.info(product.getProductPrice());
             price += product.getProductPrice() -
-                    product.getProductPrice() * discountsDAO.getById(product.getIdDiscount()).getDiscountSize();
+                    product.getProductPrice() * discountsDAO.getById(product.getIdDiscount()).getDiscountSize()/100;
         }
         return price;
     }

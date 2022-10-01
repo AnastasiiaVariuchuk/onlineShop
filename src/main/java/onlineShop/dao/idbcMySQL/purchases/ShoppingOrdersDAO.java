@@ -92,11 +92,11 @@ public class ShoppingOrdersDAO implements IShoppingOrdersDAO {
         Connection connection = ConnectionUtil.getConnection();
         try {
             preparedStatement = connection.prepareStatement("UPDATE shoppingOrders SET shoppingOrderDate=?, " +
-                    "shoppingOrderDate=?, shoppingOrderTotalPrice=?, iduser=? WHERE idproductOrder=?");
+                    "shoppingOrderTotalPrice=?, iduser=? WHERE idshoppingOrder=?");
             preparedStatement.setDate(1, (java.sql.Date) shoppingOrders.getShoppingOrderDate());
             preparedStatement.setDouble(2, shoppingOrders.getShoppingOrderTotalPrice());
             preparedStatement.setInt(3, shoppingOrders.getIdUser());
-            preparedStatement.setInt(3, shoppingOrders.getIdShoppingOrder());
+            preparedStatement.setInt(4, shoppingOrders.getIdShoppingOrder());
             if (preparedStatement.executeUpdate() == 1) {
                 logger.info("Update process is successful: " + shoppingOrders.getIdShoppingOrder() + " " + shoppingOrders.getIdUser());
             } else

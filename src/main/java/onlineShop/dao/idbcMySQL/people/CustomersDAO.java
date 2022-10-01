@@ -72,12 +72,13 @@ public class CustomersDAO implements ICustomersDAO {
         PreparedStatement preparedStatement = null;
         Connection connection = ConnectionUtil.getConnection();
         try {
-            preparedStatement = connection.prepareStatement("INSERT INTO customers VALUE(default, ?, ?, ?, ?, ?)");
-            preparedStatement.setString(1, customers.getCustomerName());
-            preparedStatement.setString(2, customers.getCustomerSurname());
-            preparedStatement.setString(3, customers.getCustomerCard());
-            preparedStatement.setString(4, customers.getCustomerPhoneNumber());
-            preparedStatement.setInt(5, customers.getIdCustomer());
+            preparedStatement = connection.prepareStatement("INSERT INTO customers VALUES(?, ?, ?, ?, ?, ?)");
+            preparedStatement.setInt(1, customers.getIdCustomer());
+            preparedStatement.setString(2, customers.getCustomerName());
+            preparedStatement.setString(3, customers.getCustomerSurname());
+            preparedStatement.setString(4, customers.getCustomerCard());
+            preparedStatement.setString(5, customers.getCustomerPhoneNumber());
+            preparedStatement.setInt(6, customers.getIdCustomerCategory());
             if (preparedStatement.executeUpdate() == 1) {
                 logger.info("Insertion is successful.");
             } else

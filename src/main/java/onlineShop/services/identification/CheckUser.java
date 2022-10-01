@@ -14,7 +14,7 @@ public class CheckUser {
         try {
             if(FindUser.getByName(user.getUserName()) != null) {
                 isUser = true;
-            };
+            }
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }

@@ -15,7 +15,7 @@ public class DiscountsDAO implements IDiscountsDAO {
     private Discounts getDiscountsById(ResultSet resultSet) throws SQLException {
         Discounts discounts1 = new Discounts();
         discounts1.setIdDiscount(resultSet.getInt("iddiscount"));
-        discounts1.setDiscountSize(resultSet.getDouble("iddiscountSize"));
+        discounts1.setDiscountSize(resultSet.getDouble("discountSize"));
         return discounts1;
     }
     @Override
@@ -67,7 +67,7 @@ public class DiscountsDAO implements IDiscountsDAO {
         PreparedStatement preparedStatement = null;
         Connection connection = ConnectionUtil.getConnection();
         try {
-            preparedStatement = connection.prepareStatement("INSERT INTO discounts VALUE(default, ?)");
+            preparedStatement = connection.prepareStatement("INSERT INTO discounts VALUES(default, ?)");
             preparedStatement.setDouble(1, discounts.getDiscountSize());
             if (preparedStatement.executeUpdate() == 1) {
                 logger.info("Insertion is successful.");

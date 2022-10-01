@@ -1,16 +1,9 @@
 package onlineShop.services;
 
 import onlineShop.ConnectionUtil;
-import onlineShop.dao.idbcMySQL.people.UsersDAO;
-import onlineShop.dao.idbcMySQL.places.AddressesDAO;
-import onlineShop.dao.idbcMySQL.places.CitiesDAO;
-import onlineShop.dao.idbcMySQL.places.CountriesDAO;
-import onlineShop.dao.idbcMySQLImpl.ipeople.ICustomersDAO;
-import onlineShop.dao.idbcMySQLImpl.iplaces.ICountriesDAO;
-import onlineShop.models.people.Users;
-import onlineShop.models.places.Addresses;
-import onlineShop.models.places.Cities;
-import onlineShop.models.places.Countries;
+import onlineShop.dao.idbcMySQL.purchases.ShoppingOrdersDAO;
+
+import onlineShop.services.orderService.Calculator;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -20,9 +13,7 @@ import java.sql.SQLException;
 
 public class Main {
     private final static Logger logger = LogManager.getLogger(Main.class);
-    private static ICountriesDAO CountryDAO;
-    private static ICustomersDAO CustomersDAO;
-    public static void main(String[] args) throws InterruptedException, IOException {
+    public static void main(String[] args) throws InterruptedException, IOException, SQLException {
         try (Connection connection = ConnectionUtil.getConnection()) {
             logger.info(String.format("Connected to database %s"
                     + " successfully.", connection.getCatalog()));
@@ -57,6 +48,18 @@ public class Main {
         logger.info(CheckUser.isCorrectPassword(users));*/
         /*AddressesDAO addressesDAO = new AddressesDAO();
         logger.info(addressesDAO.getAll());*/
+        //logger.info(SingUp.entry());
+
+        //UsersDAO usersDAO = new UsersDAO();
+       // usersDAO.getById(2);
+       // ShoppingOrders shoppingOrders = Order.createOrder(usersDAO.getById(2));
+
+        //ProductOrders productOrders = Order.createProductOrder(Assortment.chooseProduct(Assortment.chooseProductCategory()), shoppingOrders);
+
+
+        //logger.info(shoppingOrders.getShoppingOrderTotalPrice());
+        ShoppingOrdersDAO shoppingOrdersDAO = new ShoppingOrdersDAO();
+        logger.info(Calculator.totalPrice(shoppingOrdersDAO.getById(11)));
 
     }
 }

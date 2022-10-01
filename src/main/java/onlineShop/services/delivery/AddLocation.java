@@ -1,4 +1,4 @@
-package onlineShop.services;
+package onlineShop.services.delivery;
 
 import onlineShop.dao.idbcMySQL.places.AddressesDAO;
 import onlineShop.dao.idbcMySQL.places.CitiesDAO;

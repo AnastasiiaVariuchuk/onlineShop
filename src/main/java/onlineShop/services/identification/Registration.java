@@ -1,6 +1,7 @@
 package onlineShop.services.identification;
 
 
+import onlineShop.dao.idbcMySQL.people.CustomersDAO;
 import onlineShop.models.people.Customers;
 import onlineShop.models.people.Users;
 import org.apache.logging.log4j.LogManager;
@@ -61,13 +62,16 @@ public class Registration {
     public static Customers customerRegistration() throws IOException {
         Scanner scanner = new Scanner(System.in);
         Customers customer = new Customers();
+        CustomersDAO customersDAO = new CustomersDAO();
         boolean nameStatus = false;
         boolean surnameStatus = false;
         boolean phoneNumberStatus = false;
         boolean cardStatus = false;
-        //boolean customerStatus = false;
+        long count = customersDAO.getAll().stream().count();
 
         logger.info("welcome to customer registration");
+
+        customer.setIdCustomer((int) (count+1));
 
         do {
             logger.info("Enter your name: ");
