@@ -14,6 +14,11 @@ public class FindCustomer {
 
     public static Customers getByPhone(String phone) throws SQLException {
         CustomersDAO customersDAO = new CustomersDAO();
-        return customersDAO.getAll().stream().findAny().filter(customers -> customers.getCustomerPhoneNumber().equals(phone)).orElse(null);
+        for(Customers customer: customersDAO.getAll()) {
+            if(customer.getCustomerPhoneNumber().equals(phone)){
+                return customer;
+            }
+        }
+        return null;
     }
 }

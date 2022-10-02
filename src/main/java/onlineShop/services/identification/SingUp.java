@@ -47,7 +47,7 @@ public class SingUp {
         Scanner scanner = new Scanner(System.in);
         Users user = singUp();
         boolean singUpSuccess = false;
-        if(CheckUser.isUser(user) == false) {
+        while (CheckUser.isUser(user) == false) {
             logger.info("No user with such nick! ");
             logger.info("\n1 - Try again\n2 - Exit\n3 - I`m new customer");
             int choice = scanner.nextInt();
@@ -66,7 +66,7 @@ public class SingUp {
                         customersDAO.add(newCustomer);
 
                         UsersDAO usersDAO = new UsersDAO();
-                        Users newUser = Registration.userRegistration();
+                        Users newUser = Registration.userRegistration(newCustomer);
                         newUser.setIdCustomer(newCustomer.getIdCustomer());
                         usersDAO.add(newUser);
                     } catch (IOException e) {
@@ -76,7 +76,7 @@ public class SingUp {
                     break;
             }
         }
-        else if(CheckUser.isCorrectPassword(user) == false) {
+        while (CheckUser.isCorrectPassword(user) == false) {
             logger.info("Your password is wrong! ");
             logger.info("\n1 - Try again\n2 - Exit\n");
             int choice = scanner.nextInt();
@@ -89,7 +89,8 @@ public class SingUp {
                     singUpSuccess = false;
                     break;
             }
-        } else {
+        }
+        if(CheckUser.isUser(user) == true && CheckUser.isCorrectPassword(user)) {
             singUpSuccess = true;
         }
     return singUpSuccess;

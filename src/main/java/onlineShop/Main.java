@@ -1,17 +1,15 @@
-package onlineShop.services;
+package onlineShop;
 
-import onlineShop.ConnectionUtil;
+import onlineShop.dao.idbcMySQL.people.CustomersDAO;
 import onlineShop.dao.idbcMySQL.people.EmployeesDAO;
 import onlineShop.dao.idbcMySQL.people.UsersDAO;
 import onlineShop.dao.idbcMySQL.purchases.DeliveriesDAO;
-import onlineShop.dao.idbcMySQL.purchases.ShoppingOrdersDAO;
 
-import onlineShop.models.places.Addresses;
+import onlineShop.models.people.Customers;
 import onlineShop.models.purchases.Deliveries;
-import onlineShop.services.delivery.AddLocation;
-import onlineShop.services.delivery.Delivery;
-import onlineShop.services.orderService.Calculator;
-import onlineShop.services.orderService.Payment;
+import onlineShop.services.identification.FindUser;
+import onlineShop.services.identification.Registration;
+import onlineShop.services.identification.SingUp;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -61,27 +59,13 @@ public class Main {
         //logger.info(SingUp.entry());
 
         UsersDAO usersDAO = new UsersDAO();
+        CustomersDAO customersDAO = new CustomersDAO();
+        logger.info(usersDAO.getAll());
+        logger.info(FindUser.getByName("iVV"));
+        //logger.info(SingUp.entry());
         //Payment.createPayment(usersDAO.getById(2));
        // Delivery.createDelivery(usersDAO.getById(2));
-        DeliveriesDAO deliveriesDAO = new DeliveriesDAO();
-        Deliveries deliveries = new Deliveries();
 
-        deliveries.setIdAddress(1);
-
-        deliveries.setIdUser(3);
-
-        java.util.Date d1 = new Date();
-        Long l1 = d1.getTime();
-        Timestamp timestamp = new Timestamp(l1);
-        deliveries.setDeliveryDataTime(timestamp);
-
-        EmployeesDAO employeesDAO = new EmployeesDAO();
-        int max = (int) employeesDAO.getAll().stream().count();
-        int min = 1;
-        int range = max - min + 1;
-        deliveries.setIdEmployee((int)(Math.random() * range) + min);
-        logger.info(deliveries);
-        deliveriesDAO.add(deliveries);
        // ShoppingOrders shoppingOrders = Order.createOrder(usersDAO.getById(2));
 
         //ProductOrders productOrders = Order.createProductOrder(Assortment.chooseProduct(Assortment.chooseProductCategory()), shoppingOrders);

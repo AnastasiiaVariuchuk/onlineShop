@@ -73,12 +73,12 @@ public class UsersDAO implements IUsersDAO {
         PreparedStatement preparedStatement = null;
         Connection connection = ConnectionUtil.getConnection();
         try {
-            preparedStatement = connection.prepareStatement("INSERT INTO users VALUES(default, ?, ?, ?, ?)");
-            //preparedStatement.setInt(1, users.getIdUser());
-            preparedStatement.setString(1, users.getUserName());
-            preparedStatement.setString(2, users.getUserEmail());
-            preparedStatement.setString(3, users.getUserPassword());
-            preparedStatement.setInt(4, users.getIdCustomer());
+            preparedStatement = connection.prepareStatement("INSERT INTO users VALUES(?, ?, ?, ?, ?)");
+            preparedStatement.setInt(1, users.getIdUser());
+            preparedStatement.setString(2, users.getUserName());
+            preparedStatement.setString(3, users.getUserEmail());
+            preparedStatement.setString(4, users.getUserPassword());
+            preparedStatement.setInt(5, users.getIdCustomer());
             if (preparedStatement.executeUpdate() == 1) {
                 logger.info("Insertion is successful.");
             } else

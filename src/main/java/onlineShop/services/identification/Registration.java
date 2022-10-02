@@ -15,9 +15,11 @@ import java.util.Scanner;
 public class Registration {
     private static final Logger logger = LogManager.getLogger(Registration.class);
 
-    public static Users userRegistration() throws IOException {
+    public static Users userRegistration(Customers customers) throws IOException {
         Scanner scanner = new Scanner(System.in);
+        UsersDAO usersDAO = new UsersDAO();
         Users user = new Users();
+        user.setIdUser((int) (usersDAO.getAll().stream().count()+1));
         boolean nameStatus = false;
         boolean emailStatus = false;
         boolean passwordStatus = false;
@@ -65,6 +67,7 @@ public class Registration {
             }
         } while (passwordStatus != true);
 
+        user.setIdCustomer(customers.getIdCustomer());
 
         logger.info("Thank you for the registration!!");
         return user;
