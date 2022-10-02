@@ -2,12 +2,14 @@ package onlineShop.services.identification;
 
 
 import onlineShop.dao.idbcMySQL.people.CustomersDAO;
+import onlineShop.dao.idbcMySQL.people.UsersDAO;
 import onlineShop.models.people.Customers;
 import onlineShop.models.people.Users;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.Scanner;
 
 public class Registration {
@@ -25,22 +27,30 @@ public class Registration {
         do {
             logger.info("Enter your nickname: ");
             String name = scanner.nextLine();
-            if (!name.isEmpty()) {
-                user.setUserName(name);
-                nameStatus = true;
-            } else {
-                logger.info("Please, try again!");
+            try {
+                if (!name.isEmpty() && FindUser.getByName(name) == null) {
+                    user.setUserName(name);
+                    nameStatus = true;
+                } else {
+                    logger.info("Please, try again!");
+                }
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
             }
         } while (nameStatus != true);
 
         do {
             logger.info("Enter your email: ");
             String email = scanner.nextLine();
-            if (email.contains("@") && email.contains(".")) {
-                user.setUserEmail(email);
-                emailStatus = true;
-            } else {
-                logger.info("Please, try again!");
+            try {
+                if (email.contains("@") && email.contains(".") && FindUser.getByEmail(email) == null) {
+                    user.setUserEmail(email);
+                    emailStatus = true;
+                } else {
+                    logger.info("Please, try again!");
+                }
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
             }
         } while (emailStatus!= true);
 
@@ -54,6 +64,7 @@ public class Registration {
                 logger.info("Password must have at least 6 characters!");
             }
         } while (passwordStatus != true);
+
 
         logger.info("Thank you for the registration!!");
         return user;
@@ -109,12 +120,16 @@ public class Registration {
         do {
             logger.info("Enter the phone number:");
             String phoneNumber = scanner.nextLine();
-            if (phoneNumber.length() >= 10 && phoneNumber.length() <= 13 && phoneNumber.matches("\\d+")) {
-                String ph = "+" + phoneNumber;
-                customer.setCustomerPhoneNumber(ph);
-                phoneNumberStatus = true;
-            } else {
-                logger.info("Phone number has wrong format! \n EX: (+380994445566)");
+            try {
+                if (phoneNumber.length() >= 10 && phoneNumber.length() <= 13 && phoneNumber.matches("\\d+") && FindCustomer.getByPhone(phoneNumber) == null) {
+                    String ph = "+" + phoneNumber;
+                    customer.setCustomerPhoneNumber(ph);
+                    phoneNumberStatus = true;
+                } else {
+                    logger.info("Phone number has wrong format! \n EX: (+380994445566)");
+                }
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
             }
         } while (phoneNumberStatus != true);
 

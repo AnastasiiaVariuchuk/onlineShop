@@ -19,4 +19,9 @@ public class FindUser {
         UsersDAO usersDAO = new UsersDAO();
         return usersDAO.getAll().stream().findAny().filter(users -> users.getUserPassword().equals(password)).orElse(null);
     }
+
+    public static Users getByEmail(String email) throws SQLException{
+        UsersDAO usersDAO = new UsersDAO();
+        return usersDAO.getAll().stream().findAny().filter(users -> users.getUserEmail().equals(email)).orElse(null);
+    }
 }
