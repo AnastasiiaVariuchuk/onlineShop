@@ -1,15 +1,21 @@
 package onlineShop.services.patterns.abstractFactory.manufacturers;
 
-import onlineShop.services.patterns.abstractFactory.Manufacturer;
-
-public class Apple implements Manufacturer {
+public class Apple implements IManufacturer {
     private final String NAME;
+    private final double SHARE_PRICE;
 
     public Apple() {
         NAME = "APPLE";
+        SHARE_PRICE = 141.32;
     }
+
     @Override
     public String getManufactureName() {
         return NAME;
+    }
+
+    @Override
+    public double getSharePrice() {
+        return SHARE_PRICE;
     }
 }

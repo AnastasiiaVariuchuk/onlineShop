@@ -1,16 +1,22 @@
 package onlineShop.services.patterns.abstractFactory.manufacturers;
 
-import onlineShop.services.patterns.abstractFactory.Manufacturer;
-
-public class Dior implements Manufacturer {
+public class Dior implements IManufacturer {
     private final String NAME;
 
-    public Dior(){
-        NAME="DIOR";
+    private final double SHARE_PRICE;
+
+    public Dior() {
+        NAME = "DIOR";
+        SHARE_PRICE = 589.45;
     }
 
     @Override
     public String getManufactureName() {
         return NAME;
+    }
+
+    @Override
+    public double getSharePrice() {
+        return SHARE_PRICE;
     }
 }
