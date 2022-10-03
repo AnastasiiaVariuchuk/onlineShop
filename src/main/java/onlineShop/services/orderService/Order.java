@@ -67,6 +67,7 @@ public class Order {
         } while (choiceStatus != true);
 
         shoppingOrder1.setShoppingOrderTotalPrice(Calculator.totalPrice(shoppingOrder1));
+        logger.info("Total Price => " + shoppingOrder1.getShoppingOrderTotalPrice());
         shoppingOrdersDAO.update(shoppingOrder1);
         return shoppingOrder1;
     }
