@@ -70,10 +70,11 @@ public class ShoppingOrdersDAO implements IShoppingOrdersDAO {
         PreparedStatement preparedStatement = null;
         Connection connection = ConnectionUtil.getConnection();
         try {
-            preparedStatement = connection.prepareStatement("INSERT INTO shoppingOrders VALUE(default, ?, ?, ?)");
-            preparedStatement.setDate(1, (java.sql.Date) shoppingOrders.getShoppingOrderDate());
-            preparedStatement.setDouble(2, shoppingOrders.getShoppingOrderTotalPrice());
-            preparedStatement.setInt(3, shoppingOrders.getIdUser());
+            preparedStatement = connection.prepareStatement("INSERT INTO shoppingOrders VALUEs(?, ?, ?, ?)");
+            preparedStatement.setInt(1, shoppingOrders.getIdShoppingOrder());
+            preparedStatement.setDate(2, (java.sql.Date) shoppingOrders.getShoppingOrderDate());
+            preparedStatement.setDouble(3, shoppingOrders.getShoppingOrderTotalPrice());
+            preparedStatement.setInt(4, shoppingOrders.getIdUser());
             if (preparedStatement.executeUpdate() == 1) {
                 logger.info("Insertion is successful.");
             } else
@@ -98,9 +99,9 @@ public class ShoppingOrdersDAO implements IShoppingOrdersDAO {
             preparedStatement.setInt(3, shoppingOrders.getIdUser());
             preparedStatement.setInt(4, shoppingOrders.getIdShoppingOrder());
             if (preparedStatement.executeUpdate() == 1) {
-                logger.info("Update process is successful: " + shoppingOrders.getIdShoppingOrder() + " " + shoppingOrders.getIdUser());
+                logger.info("Update process is successful: ID " + shoppingOrders.getIdShoppingOrder() + " USER ID " + shoppingOrders.getIdUser());
             } else
-                logger.info("Update process was failed: " + shoppingOrders.getIdShoppingOrder() + " " + shoppingOrders.getIdUser());
+                logger.info("Update process was failed: ID " + shoppingOrders.getIdShoppingOrder() + " USER ID " + shoppingOrders.getIdUser());
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {

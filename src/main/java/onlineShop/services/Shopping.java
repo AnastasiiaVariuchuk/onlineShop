@@ -2,21 +2,17 @@ package onlineShop.services;
 
 import onlineShop.dao.idbcMySQL.people.CustomersDAO;
 import onlineShop.dao.idbcMySQL.people.UsersDAO;
-import onlineShop.dao.idbcMySQL.places.AddressesDAO;
-import onlineShop.dao.idbcMySQL.places.CountriesDAO;
 import onlineShop.models.people.Customers;
 import onlineShop.models.people.Users;
-import onlineShop.models.places.Addresses;
-import onlineShop.models.places.Cities;
-import onlineShop.models.places.Countries;
 import onlineShop.models.purchases.ShoppingOrders;
 import onlineShop.services.delivery.AddLocation;
 import onlineShop.services.delivery.Delivery;
+import onlineShop.services.identification.EntryResult;
 import onlineShop.services.identification.Registration;
 import onlineShop.services.identification.SingUp;
 import onlineShop.services.orderService.Order;
 import onlineShop.services.orderService.Payment;
-import onlineShop.services.patterns.mvc.Company;
+import onlineShop.services.orderService.ShoppingCard;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -39,6 +35,7 @@ public class Shopping {
         UsersDAO usersDAO = new UsersDAO();
         Users user = new Users();
         Customers customer = new Customers();
+        EntryResult entryResult = new EntryResult();
 
         if (choice == 0) {
 
@@ -58,15 +55,15 @@ public class Shopping {
                 throw new RuntimeException(e);
             }
         } else if (choice == 1) {
-            success = SingUp.entry();
-            logger.info("Sing up status " + success);
+            entryResult = SingUp.entry();
+            logger.info("Sing up status " + entryResult.isStatus());
+            user = entryResult.getUsers();
         }
 
         logger.info("Let`s take a look at our range!");
-        ShoppingOrders shoppingOrder = new ShoppingOrders();
-        shoppingOrder = Order.createOrder(user);
+        ShoppingCard shoppingCard = Order.createOrder(user);
 
-        if (shoppingOrder.getShoppingOrderTotalPrice() != 0) {
+        if (shoppingCard.getShoppingOrders().getShoppingOrderTotalPrice() != 0) {
             logger.info("Let's make delivery!");
             Delivery.createDelivery(user);
             logger.info("Let`s make payment!");

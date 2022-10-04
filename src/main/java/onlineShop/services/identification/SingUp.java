@@ -8,6 +8,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.Scanner;
 
 public class SingUp {
@@ -43,10 +44,12 @@ public class SingUp {
         return user;
     }
 
-    public static boolean entry() {
+    public static EntryResult entry() {
         Scanner scanner = new Scanner(System.in);
         Users user = singUp();
         boolean singUpSuccess = false;
+        EntryResult entryResult = new EntryResult();
+        UsersDAO usersDAO = new UsersDAO();
         while (CheckUser.isUser(user) == false) {
             logger.info("No user with such nick! ");
             logger.info("\n1 - Try again\n2 - Exit\n3 - I`m new customer");
@@ -65,7 +68,6 @@ public class SingUp {
                         Customers newCustomer = Registration.customerRegistration();
                         customersDAO.add(newCustomer);
 
-                        UsersDAO usersDAO = new UsersDAO();
                         Users newUser = Registration.userRegistration(newCustomer);
                         newUser.setIdCustomer(newCustomer.getIdCustomer());
                         usersDAO.add(newUser);
@@ -91,8 +93,15 @@ public class SingUp {
             }
         }
         if(CheckUser.isUser(user) == true && CheckUser.isCorrectPassword(user)) {
+            try {
+                user = FindUser.getByName(user.getUserName());
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
             singUpSuccess = true;
         }
-    return singUpSuccess;
+        entryResult.setStatus(singUpSuccess);
+        entryResult.setUsers(user);
+        return entryResult;
     }
 }
