@@ -1,6 +1,5 @@
-package onlineShop.services.patterns.mvc;
+package onlineShop.patterns.mvc;
 
-import onlineShop.services.identification.SingUp;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 

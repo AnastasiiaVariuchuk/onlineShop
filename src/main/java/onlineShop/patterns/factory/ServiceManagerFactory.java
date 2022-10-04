@@ -1,4 +1,4 @@
-package onlineShop.services.patterns.factory;
+package onlineShop.patterns.factory;
 
 public class ServiceManagerFactory {
     public ServiceManager getServiceManager(String serviceManager) {

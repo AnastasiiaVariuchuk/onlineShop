@@ -1,7 +1,7 @@
-package onlineShop.services.patterns.abstractFactory.clients;
+package onlineShop.patterns.abstractFactory.clients;
 
-import onlineShop.services.patterns.abstractFactory.AbstractFactory;
-import onlineShop.services.patterns.abstractFactory.manufacturers.IManufacturer;
+import onlineShop.patterns.abstractFactory.AbstractFactory;
+import onlineShop.patterns.abstractFactory.manufacturers.IManufacturer;
 
 public class ProfitabilityFactory extends AbstractFactory {
     @Override

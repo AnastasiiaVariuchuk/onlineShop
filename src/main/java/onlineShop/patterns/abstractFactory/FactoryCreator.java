@@ -1,8 +1,7 @@
-package onlineShop.services.patterns.abstractFactory;
+package onlineShop.patterns.abstractFactory;
 
-import onlineShop.services.patterns.abstractFactory.clients.Profitability;
-import onlineShop.services.patterns.abstractFactory.clients.ProfitabilityFactory;
-import onlineShop.services.patterns.abstractFactory.manufacturers.ManufacturerFactory;
+import onlineShop.patterns.abstractFactory.clients.ProfitabilityFactory;
+import onlineShop.patterns.abstractFactory.manufacturers.ManufacturerFactory;
 
 public class FactoryCreator {
     public static AbstractFactory getFactory(String choice){

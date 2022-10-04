@@ -1,4 +1,4 @@
-package onlineShop.services.patterns.factory;
+package onlineShop.patterns.factory;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;

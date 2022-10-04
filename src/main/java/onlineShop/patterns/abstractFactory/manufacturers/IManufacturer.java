@@ -1,4 +1,4 @@
-package onlineShop.services.patterns.abstractFactory.manufacturers;
+package onlineShop.patterns.abstractFactory.manufacturers;
 
 public interface IManufacturer {
     String getManufactureName();

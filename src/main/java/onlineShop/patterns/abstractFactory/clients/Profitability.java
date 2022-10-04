@@ -1,6 +1,6 @@
-package onlineShop.services.patterns.abstractFactory.clients;
+package onlineShop.patterns.abstractFactory.clients;
 
-import onlineShop.services.patterns.abstractFactory.manufacturers.IManufacturer;
+import onlineShop.patterns.abstractFactory.manufacturers.IManufacturer;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 

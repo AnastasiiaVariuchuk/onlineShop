@@ -1,4 +1,4 @@
-package onlineShop.services.patterns.mvc;
+package onlineShop.patterns.mvc;
 
 public class CompanyController {
     private Company company;

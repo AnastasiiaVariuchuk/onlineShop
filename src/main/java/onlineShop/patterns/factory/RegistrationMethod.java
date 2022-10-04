@@ -1,4 +1,4 @@
-package onlineShop.services.patterns.factory;
+package onlineShop.patterns.factory;
 
 import onlineShop.dao.idbcMySQL.people.CustomersDAO;
 import onlineShop.dao.idbcMySQL.people.UsersDAO;

@@ -1,10 +1,7 @@
-package onlineShop.services.patterns.abstractFactory.manufacturers;
+package onlineShop.patterns.abstractFactory.manufacturers;
 
-import onlineShop.services.patterns.abstractFactory.AbstractFactory;
-import onlineShop.services.patterns.abstractFactory.clients.Profitability;
-import onlineShop.services.patterns.abstractFactory.manufacturers.Apple;
-import onlineShop.services.patterns.abstractFactory.manufacturers.Dior;
-import onlineShop.services.patterns.abstractFactory.manufacturers.IManufacturer;
+import onlineShop.patterns.abstractFactory.AbstractFactory;
+import onlineShop.patterns.abstractFactory.clients.Profitability;
 
 public class ManufacturerFactory extends AbstractFactory {
     public IManufacturer getManufacturer(String manufacturer) {

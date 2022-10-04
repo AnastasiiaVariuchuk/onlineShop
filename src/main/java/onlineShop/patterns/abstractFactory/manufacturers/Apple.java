@@ -1,13 +1,12 @@
-package onlineShop.services.patterns.abstractFactory.manufacturers;
+package onlineShop.patterns.abstractFactory.manufacturers;
 
-public class Dior implements IManufacturer {
+public class Apple implements IManufacturer {
     private final String NAME;
-
     private final double SHARE_PRICE;
 
-    public Dior() {
-        NAME = "DIOR";
-        SHARE_PRICE = 589.45;
+    public Apple() {
+        NAME = "APPLE";
+        SHARE_PRICE = 141.32;
     }
 
     @Override
