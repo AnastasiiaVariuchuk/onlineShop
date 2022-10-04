@@ -1,18 +1,13 @@
-package onlineShop.services;
+package onlineShop.services.orderService;
 
 import onlineShop.dao.idbcMySQL.people.CustomersDAO;
 import onlineShop.dao.idbcMySQL.people.UsersDAO;
 import onlineShop.models.people.Customers;
 import onlineShop.models.people.Users;
-import onlineShop.models.purchases.ShoppingOrders;
-import onlineShop.services.delivery.AddLocation;
 import onlineShop.services.delivery.Delivery;
 import onlineShop.services.identification.EntryResult;
 import onlineShop.services.identification.Registration;
 import onlineShop.services.identification.SingUp;
-import onlineShop.services.orderService.Order;
-import onlineShop.services.orderService.Payment;
-import onlineShop.services.orderService.ShoppingCard;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -20,7 +15,7 @@ import java.io.IOException;
 import java.util.Scanner;
 
 public class Shopping {
-    private static final Logger logger = LogManager.getLogger(AddLocation.class);
+    private static final Logger logger = LogManager.getLogger(Shopping.class);
 
     public static boolean shopping() {
         boolean shoppingStatus = false;

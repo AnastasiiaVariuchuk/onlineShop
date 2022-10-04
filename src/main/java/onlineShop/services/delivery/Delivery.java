@@ -17,7 +17,9 @@ public class Delivery {
     private static final Logger logger = LogManager.getLogger(Delivery.class);
     public static void createDelivery(Users users) {
         DeliveriesDAO deliveriesDAO = new DeliveriesDAO();
+        long count = deliveriesDAO.getAll().stream().count();
         Deliveries deliveries = new Deliveries();
+        deliveries.setIdDelivery((int) count + 100);
 
         Addresses addresses = AddLocation.addAddress(AddLocation.getCity(AddLocation.getCountry()));
         deliveries.setIdAddress(addresses.getIdAddress());
@@ -34,6 +36,7 @@ public class Delivery {
         int min = 1;
         int range = max - min + 1;
         deliveries.setIdEmployee((int)(Math.random() * range) + min);
+        logger.info(employeesDAO.getById(deliveries.getIdEmployee()));
         deliveriesDAO.add(deliveries);
     }
 }

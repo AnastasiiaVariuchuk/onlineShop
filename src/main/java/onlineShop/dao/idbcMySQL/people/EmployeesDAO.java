@@ -72,11 +72,12 @@ public class EmployeesDAO implements IEmployeesDAO {
         PreparedStatement preparedStatement = null;
         Connection connection = ConnectionUtil.getConnection();
         try {
-            preparedStatement = connection.prepareStatement("INSERT INTO employees VALUE(default, ?, ?, ?, ?, ?)");
-            preparedStatement.setString(1, employees.getEmployeeName());
-            preparedStatement.setString(2, employees.getEmployeeSurname());
-            preparedStatement.setString(3, employees.getEmployeeContact());
-            preparedStatement.setDouble(4, employees.getEmployeeSalary());
+            preparedStatement = connection.prepareStatement("INSERT INTO employees VALUES(?, ?, ?, ?, ?)");
+            preparedStatement.setInt(1, employees.getIdEmployee());
+            preparedStatement.setString(2, employees.getEmployeeName());
+            preparedStatement.setString(3, employees.getEmployeeSurname());
+            preparedStatement.setString(4, employees.getEmployeeContact());
+            preparedStatement.setDouble(5, employees.getEmployeeSalary());
             if (preparedStatement.executeUpdate() == 1) {
                 logger.info("Insertion is successful.");
             } else
